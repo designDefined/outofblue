@@ -6,9 +6,7 @@ import MenuBar from "@/components/common/MenuBar";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <AudioPlayer />
       <Component {...pageProps} />
-      <MenuBar />
     </>
   );
 }

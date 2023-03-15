@@ -6,128 +6,17 @@
 
 .main {
   position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.prop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-}
-
-@include responsive.desktop {
-  .content {
-    @include sizing.mainContent;
-    @include background.home;
-    transition: 0.75s ease-in;
-  }
-
-  .tvViewport {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    perspective: max(50vw, 88vh);
-  }
-
-  .tv {
-    position: absolute;
-    left: 11.5%;
-    top: 35.2%;
-    width: 29%;
-    height: 26.7%;
-    transform-origin: left center;
-    transform: rotateY(91deg) rotateZ(-0.9deg);
-    transition: 0.1s;
-    transition-property: box-shadow;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-      box-shadow: 0 0 15px rgba(255, 242, 0, 0.8);
-    }
-
-    video {
-      height: 95%;
-    }
-
-    &.clickTv {
-      img {
-        transition: 0.1s;
-        opacity: 0.3;
-      }
-    }
-  }
-
-  .lpWrapper {
-    position: absolute;
-    width: 6%;
-    height: 10.5%;
-    left: 81.5%;
-    top: 51%;
-  }
-}
-
-@include responsive.mobile() {
-  .main {
-    width: 100%;
-    height: 100vh;
-    overflow-y: auto;
-  }
-  .content {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 9/20;
-    background: background.$bg-homeMobile center top no-repeat;
-    background-size: contain;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: 0.75s ease-in;
-  }
-  .tvViewport {
-    position: absolute;
-    top: 20.5%;
-    left: 23.5%;
-    width: 64.5%;
-    height: 16.3%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .tv {
-      width: 100%;
-      height: 100%;
-      animation: 1s ease infinite blinkBox alternate-reverse;
-      video {
-        width: 100%;
-        filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
-      }
-    }
-  }
-}
-.blink {
-  animation: 2s ease infinite blinkOpacity alternate-reverse;
-}
-@keyframes blinkOpacity {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-  //    animation: 1s ease infinite blink alternate-reverse;
-}
-@keyframes blinkBox {
-  0% {
-    box-shadow: 0 0 5px rgba(255, 242, 0, 0);
-  }
-  100% {
-    box-shadow: 0 0 10px rgba(255, 247, 0, 1);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  font-family: "KCCChassam", sans-serif;
+  color: black;
+  font-size: 32px;
+  > div {
+    text-align: center;
+    word-break: keep-all;
   }
 }

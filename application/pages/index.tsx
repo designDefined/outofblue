@@ -93,25 +93,6 @@ const mobileRoutes: RouteData[] = [
 ];
 
 export default function Home() {
-  const router = useRouter();
-  const [clickTv, setClickTv] = useState(false);
-  const [transitionStyle, setTransitionStyle] = useState<
-    { transform: string; opacity: number } | {}
-  >({});
-  const currentVideoName = useVideoStore((state) => state.currentVideoName);
-  const currentAudio = useAudioStore((state) => state.currentTrack);
-  const mute = useMuteStore((state) => state.mute);
-
-  const startTransitionTo = (path: string, x: number, y: number) => {
-    return () => {
-      setTransitionStyle({
-        transform: `scale(1.8) translate(${x}%,${y}%)`,
-        opacity: 0,
-      });
-      setTimeout(() => router.push(`/${path}`), 1000);
-    };
-  };
-
   return (
     <>
       <Head>
@@ -121,77 +102,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={cx("main")}>
-        <div className={cx("content")} style={transitionStyle}>
-          <div className={cx("tvViewport")}>
-            <div
-              className={cx("tv", { clickTv })}
-              onClick={() => {
-                startTransitionTo("tv", 15, 0)();
-              }}
-              onMouseDown={() => {
-                setClickTv(true);
-              }}
-              onMouseUp={() => {
-                setClickTv(false);
-              }}
-            >
-              {currentVideoName && (
-                <video
-                  src={getVideoURL(currentVideoName, 480)}
-                  muted={mute || currentAudio !== null}
-                  autoPlay
-                  loop
-                />
-              )}
-            </div>
-          </div>
-          <div className={cx("lpWrapper")}>
-            <LpPlayer />
-          </div>
-          {routes.map(({ source, path, drawRect, zoomIn }) => (
-            <RouteButton
-              key={path}
-              source={source}
-              drawRect={drawRect}
-              callBackFunction={startTransitionTo(path, zoomIn[0], zoomIn[1])}
-              isPc
-            />
-          ))}
-          {mobileRoutes.map(({ source, path, drawRect, zoomIn }) => (
-            <RouteButton
-              key={path}
-              source={source}
-              drawRect={drawRect}
-              callBackFunction={startTransitionTo(path, zoomIn[0], zoomIn[1])}
-              isPc={false}
-            />
-          ))}
-          <Image
-            className={cx("prop", "pcOnly")}
-            src={sup_cup_pc}
-            alt="cup"
-            fill={true}
-          />
-          <Image
-            className={cx("prop", "pcOnly")}
-            src={sup_bookCover_pc}
-            alt="cup"
-            fill={true}
-          />
-          <Image
-            className={cx("prop", "mobileOnly", "blink")}
-            src={sup_fire1_mobile}
-            alt="fire"
-            fill
-          />
-          <Image
-            className={cx("prop", "mobileOnly")}
-            src={sup_chair_mobile}
-            alt="chair "
-            fill
-          />
-        </div>
-        <Greeting />
+        <div>아웃 오브 블루의 홈페이지는 현재 작업 중입니다!</div>
       </main>
     </>
   );
