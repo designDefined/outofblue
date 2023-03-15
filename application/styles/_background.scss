@@ -1,0 +1,25 @@
+@mixin home {
+  aspect-ratio: 1920 / 1080;
+  background: url("/assets/background/home_pc/bg_homeWinter_pc.png") no-repeat;
+  background-size: contain;
+}
+
+@mixin tv {
+  background: no-repeat;
+  background-size: cover;
+}
+
+@mixin books {
+  background: url("/assets/background/books/bg_booksWinter.png") no-repeat
+    center top;
+  background-size: cover;
+}
+
+$bg-tv: url("/assets/background/tv/bg_tv.png");
+$bg-books: url("/assets/background/books/bg_booksWinter.png");
+$bg-lp: url("/assets/background/lp/bg_lpWinter.png");
+$bg-mailbox: url("/assets/background/mailbox/bg_mailbox.png");
+
+$bg-bubble: url("/assets/background/text_bubble/text_bubble.png");
+
+$bg-homeMobile: url("/assets/background/home_mobile/bg_home_mobile.png");

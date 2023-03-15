@@ -1,0 +1,27 @@
+@use "./styles/sizing";
+@use "./styles/background";
+@use "./styles/responsive";
+
+@include responsive.desktop {
+  .main {
+    @include sizing.subContainer(150vh);
+    overflow-x: auto;
+    align-items: flex-start;
+  }
+
+  .content {
+    @include sizing.subContent(background.$bg-mailbox);
+  }
+}
+
+@include responsive.mobile {
+  .main {
+    @include sizing.mobileContainer(150vh);
+    background-color: rgba(234, 192, 175);
+    overflow-x: hidden;
+  }
+  .content {
+    @include sizing.mobileContent(background.$bg-mailbox);
+    width: 150%;
+  }
+}
