@@ -29,4 +29,9 @@
   }
 }
 @include responsive.mobile {
+  .MenuBar {
+    width: 30%;
+    height: 6%;
+    top: 0;
+  }
 }

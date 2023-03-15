@@ -103,6 +103,7 @@
     .tv {
       width: 100%;
       height: 100%;
+      animation: 1s ease infinite blinkBox alternate-reverse;
       video {
         width: 100%;
         filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
@@ -110,8 +111,20 @@
     }
   }
 }
-
-@keyframes blinkShadow {
+@keyframes blink {
   0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+  //    animation: 1s ease infinite blink alternate-reverse;
+}
+@keyframes blinkBox {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 242, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 242, 0, 0.8);
   }
 }

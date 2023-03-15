@@ -1,5 +1,15 @@
 @use "./styles/responsive";
 
+@keyframes blink {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0));
+  }
+  100% {
+    filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
+  }
+  //    animation: 1s ease infinite blink alternate-reverse;
+}
+
 @include responsive.only;
 .prop {
   position: absolute;
@@ -15,6 +25,7 @@
   }
   @include responsive.mobile {
     filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
+    animation: 1s ease infinite blink alternate-reverse;
   }
 }
 
