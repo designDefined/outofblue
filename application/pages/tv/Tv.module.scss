@@ -31,7 +31,6 @@
   }
   .content {
     @include sizing.subContent(background.$bg-tv);
-    width: 100%;
   }
   .bubbleWrapper {
     position: absolute;
