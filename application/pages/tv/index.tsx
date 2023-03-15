@@ -1,7 +1,7 @@
 import styles from "./Tv.module.scss";
 import classNames from "classnames/bind";
 import { getVideoURL } from "@/functions";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import sup_flower from "public/assets/background/tv/sup_flower.png";
 import { useVideoStore } from "@/store/videoStore";
@@ -70,6 +70,11 @@ export default function Tv() {
     (state) => state,
   );
   const [displayBubble, setDisplayBubble] = useState(false);
+
+  useEffect(() => {
+    if (!currentVideoName) setCurrentVideoName("liebesKamel");
+  }, []);
+
   return (
     <main className={cx("main")}>
       <div className={cx("content")}>
@@ -80,13 +85,15 @@ export default function Tv() {
             videoRef.current?.pause();
           }}
         >
-          <video
-            ref={videoRef}
-            src={getVideoURL(currentVideoName, 1920)}
-            muted={muted}
-            autoPlay={true}
-            loop={true}
-          />
+          {currentVideoName && (
+            <video
+              ref={videoRef}
+              src={getVideoURL(currentVideoName, 1920)}
+              muted={muted}
+              autoPlay={true}
+              loop={true}
+            />
+          )}
         </div>
         <Image className={cx("prop")} src={sup_flower} alt={"lp"} />
       </div>

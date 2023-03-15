@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
 type VideoStore = {
-  currentVideoName: string;
+  currentVideoName: null | string;
   setCurrentVideoName: (name: string) => void;
 };
 
 export const useVideoStore = create<VideoStore>()((set) => ({
-  currentVideoName: "liebesKamel",
+  currentVideoName: null,
   setCurrentVideoName: (name) => set({ currentVideoName: name }),
 }));

@@ -1,6 +1,6 @@
 import styles from "./homeComponents.module.scss";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const greetingTitle = "아웃오브블루의 공간 ‘The Blue Room’";
 const greetingData = [
@@ -25,7 +25,13 @@ const greetingData = [
 
 const cx = classNames.bind(styles);
 export default function Greeting() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const session = sessionStorage.getItem("greeting");
+    if (!session) {
+      setOpen(true);
+    }
+  }, []);
   return (
     <div
       className={cx("Greeting", { pcOnly: true, open })}
@@ -38,6 +44,7 @@ export default function Greeting() {
           className={cx("close")}
           onClick={() => {
             setOpen(false);
+            sessionStorage.setItem("greeting", JSON.stringify(true));
           }}
         >
           닫기

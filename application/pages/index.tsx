@@ -130,12 +130,14 @@ export default function Home() {
                 setClickTv(false);
               }}
             >
-              <video
-                src={getVideoURL(currentVideoName, 480)}
-                muted
-                autoPlay
-                loop
-              />
+              {currentVideoName && (
+                <video
+                  src={getVideoURL(currentVideoName, 480)}
+                  muted
+                  autoPlay
+                  loop
+                />
+              )}
             </div>
           </div>
           <div className={cx("lpWrapper")}>
