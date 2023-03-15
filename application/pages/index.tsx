@@ -22,6 +22,8 @@ import sup_woods_pc from "public/assets/background/home_pc/sup_woods_pc.png";
 import sup_books_mobile from "public/assets/background/home_mobile/sup_books_mobile.png";
 import sup_mailbox_mobile from "public/assets/background/home_mobile/sup_mailbox_mobile.png";
 import sup_lp_mobile from "public/assets/background/home_mobile/sup_LP_mobile.png";
+import sup_fire1_mobile from "public/assets/background/home_mobile/sup_fire1_mobile.png";
+import sup_chair_mobile from "public/assets/background/home_mobile/sup_chair_mobile.png";
 
 import RouteButton from "@/components/home/RouteButton";
 import { getVideoURL } from "@/functions";
@@ -175,6 +177,18 @@ export default function Home() {
             src={sup_bookCover_pc}
             alt="cup"
             fill={true}
+          />
+          <Image
+            className={cx("prop", "mobileOnly", "blink")}
+            src={sup_fire1_mobile}
+            alt="fire"
+            fill
+          />
+          <Image
+            className={cx("prop", "mobileOnly")}
+            src={sup_chair_mobile}
+            alt="chair "
+            fill
           />
         </div>
         <Greeting />

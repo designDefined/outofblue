@@ -10,6 +10,13 @@
   height: 100%;
 }
 
+.prop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
 @include responsive.desktop {
   .content {
     @include sizing.mainContent;
@@ -64,13 +71,6 @@
     left: 81.5%;
     top: 51%;
   }
-
-  .prop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-  }
 }
 
 @include responsive.mobile() {
@@ -111,7 +111,10 @@
     }
   }
 }
-@keyframes blink {
+.blink {
+  animation: 2s ease infinite blinkOpacity alternate-reverse;
+}
+@keyframes blinkOpacity {
   0% {
     opacity: 0;
   }
@@ -122,7 +125,7 @@
 }
 @keyframes blinkBox {
   0% {
-    box-shadow: 0 0 10px rgba(255, 242, 0, 0);
+    box-shadow: 0 0 5px rgba(255, 242, 0, 0);
   }
   100% {
     box-shadow: 0 0 10px rgba(255, 247, 0, 1);

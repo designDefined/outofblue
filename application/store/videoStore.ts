@@ -6,6 +6,6 @@ type VideoStore = {
 };
 
 export const useVideoStore = create<VideoStore>()((set) => ({
-  currentVideoName: null,
+  currentVideoName: "liebesKamel",
   setCurrentVideoName: (name) => set({ currentVideoName: name }),
 }));
