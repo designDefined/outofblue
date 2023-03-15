@@ -7,6 +7,7 @@ import sup_lp from "public/assets/background/lp/sup_lp.png";
 import cover_ifNoLove from "public/assets/background/lp/cover_ifNoLove.jpg";
 import cover_myPromise from "public/assets/background/lp/cover_myPromise.jpg";
 import cover_liebesKamel from "public/assets/background/lp/cover_liebesKamel.jpg";
+import { useMuteStore } from "@/store/muteStore";
 
 const cx = classNames.bind(styles);
 
@@ -70,6 +71,7 @@ export default function Lp() {
   const setCurrentTrack = useAudioStore((state) => state.setCurrentTrack);
   const playing = useAudioStore((state) => state.playing);
   const setPlaying = useAudioStore((state) => state.setPlaying);
+  const setMute = useMuteStore((state) => state.setMute);
 
   const [displayBubble, setDisplayBubble] = useState(false);
   return (
@@ -137,6 +139,7 @@ export default function Lp() {
                             setCurrentTrack(track);
                             setPlaying(true);
                             setDisplayBubble(false);
+                            setMute(false);
                           }}
                         >
                           재생

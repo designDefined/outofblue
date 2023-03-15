@@ -1,0 +1,32 @@
+@use "./styles/responsive";
+
+.MenuBar {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  right: 0;
+  background-color: rgba(black, 0.3);
+  opacity: 0.8;
+  z-index: 999;
+  button {
+    position: relative;
+    width: 30%;
+    aspect-ratio: 1/1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(black, 0.5);
+    }
+  }
+}
+@include responsive.desktop {
+  .MenuBar {
+    width: 12%;
+    height: 8%;
+    bottom: 0;
+  }
+}
+@include responsive.mobile {
+}

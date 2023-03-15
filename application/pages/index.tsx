@@ -29,6 +29,7 @@ import { useVideoStore } from "@/store/videoStore";
 import { useAudioStore } from "@/store/audioStore";
 import { LpPlayer } from "@/components/home/CustomProp";
 import Greeting from "@/components/home/Greeting";
+import { useMuteStore } from "@/store/muteStore";
 
 const cx = classNames.bind(styles);
 
@@ -96,6 +97,8 @@ export default function Home() {
     { transform: string; opacity: number } | {}
   >({});
   const currentVideoName = useVideoStore((state) => state.currentVideoName);
+  const currentAudio = useAudioStore((state) => state.currentTrack);
+  const mute = useMuteStore((state) => state.mute);
 
   const startTransitionTo = (path: string, x: number, y: number) => {
     return () => {
@@ -133,7 +136,7 @@ export default function Home() {
               {currentVideoName && (
                 <video
                   src={getVideoURL(currentVideoName, 480)}
-                  muted
+                  muted={mute || currentAudio !== null}
                   autoPlay
                   loop
                 />

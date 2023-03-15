@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import sup_flower from "public/assets/background/tv/sup_flower.png";
 import { useVideoStore } from "@/store/videoStore";
+import { useMuteStore } from "@/store/muteStore";
+import { useAudioStore } from "@/store/audioStore";
 
 const cx = classNames.bind(styles);
 
@@ -65,11 +67,13 @@ const data: {
 
 export default function Tv() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const globalMute = useMuteStore((state) => state.mute);
   const [muted, setMuted] = useState(true);
   const { currentVideoName, setCurrentVideoName } = useVideoStore(
     (state) => state,
   );
   const [displayBubble, setDisplayBubble] = useState(false);
+  const setAudioPlaying = useAudioStore((state) => state.setPlaying);
 
   useEffect(() => {
     if (!currentVideoName) setCurrentVideoName("liebesKamel");
@@ -89,7 +93,7 @@ export default function Tv() {
             <video
               ref={videoRef}
               src={getVideoURL(currentVideoName, 1920)}
-              muted={muted}
+              muted={muted || globalMute}
               autoPlay={true}
               loop={true}
             />
@@ -121,6 +125,7 @@ export default function Tv() {
                           onClick={() => {
                             setMuted(false);
                             setDisplayBubble(false);
+                            setAudioPlaying(false);
                             videoRef.current?.play();
                           }}
                         >
@@ -133,6 +138,7 @@ export default function Tv() {
                               setCurrentVideoName(videoName);
                               setMuted(false);
                               setDisplayBubble(false);
+                              setAudioPlaying(false);
                               //videoRef.current?.play();
                             }}
                           >
