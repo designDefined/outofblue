@@ -1,0 +1,144 @@
+@use "./styles/responsive";
+
+@include responsive.only;
+.prop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transition: 0.1s ease-out;
+  &.hovered {
+    filter: drop-shadow(0 0 15px rgba(255, 242, 0, 0.8));
+  }
+  &.pressed {
+    filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
+  }
+  @include responsive.mobile {
+    filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
+  }
+}
+
+.routeButton {
+  position: absolute;
+  cursor: pointer;
+}
+
+.LpPlayer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(72, 47, 21, 0.5);
+    visibility: hidden;
+    font-family: "GyeonggiTitleM", sans-serif;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  &:hover {
+    .overlay {
+      visibility: visible;
+    }
+  }
+}
+
+@include responsive.desktop {
+  .Greeting {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(black, 0.5);
+    color: white;
+    padding: 40px;
+    overflow-y: auto;
+
+    &.open {
+      display: block;
+    }
+  }
+  .title {
+    font-family: "GyeonggiTitleM", sans-serif;
+    font-size: 60px;
+    margin-bottom: 80px;
+  }
+  .text {
+    font-family: "KCCChassam", sans-serif;
+    font-size: 32px;
+    white-space: pre-wrap;
+  }
+  .close {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    font-family: "GyeonggiTitleM", sans-serif;
+    font-size: 60px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    color: #484848;
+    opacity: 0.5;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+@include responsive.mobile {
+  .Greeting {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(black, 0.5);
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+
+    &.open {
+      display: block;
+    }
+  }
+  .title {
+    font-family: "GyeonggiTitleM", sans-serif;
+    font-size: 32px;
+    margin-bottom: 40px;
+  }
+  .text {
+    font-family: "KCCChassam", sans-serif;
+    font-size: 20px;
+    white-space: pre-wrap;
+    line-height: 1.5em;
+  }
+  .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: "GyeonggiTitleM", sans-serif;
+    font-size: 60px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    color: #484848;
+    opacity: 0.5;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

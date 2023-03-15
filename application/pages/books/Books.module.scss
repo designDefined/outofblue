@@ -1,0 +1,300 @@
+@use "./styles/sizing";
+@use "./styles/background";
+@use "./styles/responsive";
+
+.content {
+  .coverButton {
+    position: absolute;
+    width: 15.8%;
+    height: 23.5%;
+    left: 44.6%;
+    top: 70.8%;
+    transform: rotate(-16.5deg);
+    cursor: pointer;
+    &:hover {
+      background: rgba(black, 0.3);
+    }
+  }
+}
+@include responsive.desktop {
+  .main {
+    @include sizing.subContainer();
+    overflow-x: auto;
+    align-items: flex-start;
+  }
+
+  .content {
+    @include sizing.subContent(background.$bg-books);
+  }
+
+  .bubbleWrapper {
+    position: absolute;
+    width: calc(100vh / 9 * 18);
+    height: 100%;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: background.$bg-bubble no-repeat bottom;
+    background-size: cover;
+    font-family: "KCCChassam", sans-serif;
+    transform: translateY(60px) scale(-100%, -100%);
+
+    .list {
+      position: absolute;
+      width: 60%;
+      height: 40%;
+      top: 40%;
+      display: flex;
+      align-items: center;
+      transform: scale(-100%, -100%);
+    }
+    .listItem {
+      position: relative;
+      width: min(360px, 100%);
+      height: 100%;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 10%;
+      margin: 0 10px;
+      .coverWrapper {
+        position: relative;
+        width: 50%;
+        aspect-ratio: 1 auto;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: black;
+        img {
+          position: relative !important;
+          height: auto !important;
+        }
+        .bookOverlay {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          color: white;
+          font-size: 28px;
+          background-color: rgba(72, 47, 21, 0.5);
+          visibility: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          &.on {
+            visibility: visible;
+          }
+        }
+        &:hover {
+          .bookOverlay {
+            visibility: visible;
+          }
+        }
+      }
+
+      .textWrapper {
+        overflow-y: auto;
+        padding: 0 22px 0 32px;
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: #ffffff;
+          border-radius: 100px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #cbcbcb;
+          border-radius: 100px;
+        }
+      }
+
+      .title {
+        width: 100%;
+        font-size: 32px;
+        font-weight: 600;
+        text-align: center;
+        font-family: "GyeonggiTitleM", sans-serif;
+        margin-bottom: 16px;
+        white-space: pre-wrap;
+      }
+      .subTitle {
+        width: 100%;
+        font-size: 28px;
+        font-weight: 400;
+        text-align: center;
+        font-family: "GmarketSansMedium", sans-serif;
+      }
+      .text {
+        width: 100%;
+        font-size: 20px;
+        white-space: pre-wrap;
+        line-height: 1.2em;
+      }
+    }
+  }
+
+  .readingWrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(black, 0.7);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+
+    .pageWrapper {
+      position: relative;
+      width: 35%;
+      height: 100%;
+      cursor: default;
+    }
+    .pageButton {
+      cursor: pointer;
+      visibility: hidden;
+      border: none;
+      background: none;
+      font-size: 36px;
+      font-family: "GmarketSansMedium", sans-serif;
+      color: white;
+      &:hover {
+        color: gray;
+      }
+      &.active {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+@include responsive.mobile {
+  .main {
+    @include sizing.mobileContainer;
+    background-color: rgba(234, 192, 175);
+    overflow-x: hidden;
+  }
+  .content {
+    @include sizing.mobileContent(background.$bg-books);
+    width: 150%;
+  }
+  .bubbleWrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    font-family: "KCCChassam", sans-serif;
+
+    .list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+    }
+    .listItem {
+      position: relative;
+      width: 80%;
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 5%;
+      border-radius: 20px;
+      box-shadow: 0 0 5px rgba(black, 0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .coverWrapper {
+        position: relative;
+        width: 50%;
+        aspect-ratio: 1 auto;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        img {
+          position: relative !important;
+          height: auto !important;
+        }
+      }
+    }
+    .bookOverlay {
+      margin-top: 10px;
+      button {
+        font: inherit;
+        border: #76a676 solid 3px;
+        background: none;
+        color: #76a676;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin: 0 5px;
+      }
+    }
+
+    .title {
+      width: 100%;
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+      font-family: "GyeonggiTitleM", sans-serif;
+    }
+
+    .subTitle {
+      width: 100%;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      text-align: center;
+      font-family: "GmarketSansMedium", sans-serif;
+    }
+
+    .text {
+      width: 100%;
+      font-size: 18px;
+      white-space: pre-wrap;
+      line-height: 1.5em;
+    }
+  }
+  .readingWrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(black, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    cursor: pointer;
+
+    .pageWrapper {
+      position: relative;
+      width: 100%;
+      height: 64%;
+      cursor: default;
+    }
+    .pageButton {
+      cursor: pointer;
+      visibility: hidden;
+      border: none;
+      background: none;
+      font-size: 36px;
+      font-family: "GmarketSansMedium", sans-serif;
+      color: white;
+
+      &.active {
+        visibility: visible;
+      }
+    }
+  }
+}
+
+@include responsive.only;
