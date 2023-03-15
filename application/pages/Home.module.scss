@@ -122,9 +122,9 @@
 }
 @keyframes blinkBox {
   0% {
-    box-shadow: 0 0 5px rgba(255, 242, 0, 0);
+    box-shadow: 0 0 10px rgba(255, 242, 0, 0);
   }
   100% {
-    box-shadow: 0 0 5px rgba(255, 242, 0, 0.8);
+    box-shadow: 0 0 10px rgba(255, 247, 0, 1);
   }
 }

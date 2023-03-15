@@ -26,6 +26,12 @@ export default function RouteButton({
 
   return (
     <>
+      <Image
+        className={cx("prop", buttonState, { pcOnly: isPc, mobileOnly: !isPc })}
+        src={source}
+        alt={`routing button`}
+        fill={true}
+      />
       <div
         className={cx("routeButton", { pcOnly: isPc, mobileOnly: !isPc })}
         style={{ left: left, top, width, height }}
@@ -42,13 +48,9 @@ export default function RouteButton({
           setButtonState({ ...buttonState, pressed: false });
         }}
         onClick={() => callBackFunction()}
-      />
-      <Image
-        className={cx("prop", buttonState, { pcOnly: isPc, mobileOnly: !isPc })}
-        src={source}
-        alt={`routing button`}
-        fill={true}
-      />
+      >
+        {!isPc && <div>click!</div>}
+      </div>
     </>
   );
 }

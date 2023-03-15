@@ -181,7 +181,8 @@
 @include responsive.mobile {
   .main {
     @include sizing.mobileContainer;
-    align-items: flex-start;
+    align-items: center;
+    overflow-x: hidden;
     //  background-color: #76a676;
     background-color: rgba(234, 192, 175);
   }

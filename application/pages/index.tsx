@@ -73,7 +73,7 @@ const mobileRoutes: RouteData[] = [
   {
     path: "mailbox",
     source: sup_mailbox_mobile,
-    drawRect: [0, 3, 17, 13],
+    drawRect: [-1, 3, 17, 13],
     zoomIn: [20, 15],
   },
   {
