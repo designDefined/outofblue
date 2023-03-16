@@ -102,7 +102,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={cx("main")}>
-        <div>아웃 오브 블루의 홈페이지는 현재 작업 중입니다!</div>
+        <div>아웃오브블루의 홈페이지는 현재 작업 중입니다!</div>
+        <div>~3 / 19 </div>
       </main>
     </>
   );
