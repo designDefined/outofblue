@@ -77,24 +77,17 @@ export default function Greeting() {
         )}
         {<div className={cx("text")}>{greetingMobile[page]}</div>}
         {
-          <div
-            className={cx("buttons")}
-            onClick={() => {
-              setPage(page + 1);
-            }}
-          >
+          <div className={cx("buttons")}>
             <button
-              className={cx("button")}
-              onClick={() => {
-                setPage(page - 1);
-              }}
+              className={cx("button", { invisible: page === 0 })}
+              onClick={() => setPage(page - 1)}
             >
-              <img src={"assets/icon/arrow4.png"} />
+              <img src={"assets/icon/arrow_left.png"} />
               이전
             </button>
             {page === greetingMobile.length - 1 ? (
               <div
-                className={cx("next")}
+                className={cx("button")}
                 onClick={() => {
                   setPage(0);
                   setOpen(false);
@@ -107,7 +100,7 @@ export default function Greeting() {
                 className={cx("button")}
                 onClick={() => setPage(page + 1)}
               >
-                다음 <img src="assets/icon/arrow3.png" />
+                다음 <img src="assets/icon/arrow_right.png" />
               </button>
             )}
           </div>

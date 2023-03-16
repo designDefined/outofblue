@@ -161,7 +161,7 @@
   }
   .buttons {
     position: absolute;
-    bottom: 10%;
+    bottom: 16%;
     width: 80%;
     display: flex;
     justify-content: space-between;
@@ -173,10 +173,12 @@
       color: white;
       font-family: "GyeonggiTitleM", sans-serif;
       font-size: 20px;
-      background: red;
+      &.invisible {
+        visibility: hidden;
+      }
       img {
-        height: 200px;
         width: auto;
+        margin: 0 2px;
       }
     }
   }
