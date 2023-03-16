@@ -159,6 +159,27 @@
     opacity: 1;
     cursor: pointer;
   }
+  .buttons {
+    position: absolute;
+    bottom: 10%;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    .button {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      color: white;
+      font-family: "GyeonggiTitleM", sans-serif;
+      font-size: 20px;
+      background: red;
+      img {
+        height: 200px;
+        width: auto;
+      }
+    }
+  }
   .arrow1 {
     position: absolute;
     top: -2%;

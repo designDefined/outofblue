@@ -76,26 +76,42 @@ export default function Greeting() {
           <img className={cx("arrow3")} src="assets/greet/arrow1.png" />
         )}
         {<div className={cx("text")}>{greetingMobile[page]}</div>}
-        {page === greetingMobile.length - 1 ? (
+        {
           <div
-            className={cx("next")}
-            onClick={() => {
-              setPage(0);
-              setOpen(false);
-            }}
-          >
-            닫기
-          </div>
-        ) : (
-          <div
-            className={cx("next")}
+            className={cx("buttons")}
             onClick={() => {
               setPage(page + 1);
             }}
           >
-            다음
+            <button
+              className={cx("button")}
+              onClick={() => {
+                setPage(page - 1);
+              }}
+            >
+              <img src={"assets/icon/arrow4.png"} />
+              이전
+            </button>
+            {page === greetingMobile.length - 1 ? (
+              <div
+                className={cx("next")}
+                onClick={() => {
+                  setPage(0);
+                  setOpen(false);
+                }}
+              >
+                닫기
+              </div>
+            ) : (
+              <button
+                className={cx("button")}
+                onClick={() => setPage(page + 1)}
+              >
+                다음 <img src="assets/icon/arrow3.png" />
+              </button>
+            )}
           </div>
-        )}
+        }
       </div>
     </div>
   );
