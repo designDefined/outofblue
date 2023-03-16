@@ -141,6 +141,7 @@ export default function Home() {
                   muted={mute || currentAudio !== null}
                   autoPlay
                   loop
+                  playsInline
                 />
               )}
             </div>

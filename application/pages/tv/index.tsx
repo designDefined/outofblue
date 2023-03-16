@@ -94,8 +94,9 @@ export default function Tv() {
               ref={videoRef}
               src={getVideoURL(currentVideoName, 1920)}
               muted={muted || globalMute}
-              autoPlay={true}
-              loop={true}
+              autoPlay
+              loop
+              playsInline
             />
           )}
         </div>
