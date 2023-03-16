@@ -111,11 +111,17 @@
     }
   }
 }
-.blink {
-  animation: 2s ease infinite blinkOpacity alternate;
+.blink1 {
+  animation: 5s ease infinite blinkOpacity alternate;
+}
+.blink2 {
+  animation: 5s ease infinite blinkOpacity alternate-reverse;
 }
 @keyframes blinkOpacity {
   0% {
+    opacity: 0;
+  }
+  25% {
     opacity: 0;
   }
   100% {
@@ -123,6 +129,7 @@
   }
   //    animation: 1s ease infinite blink alternate-reverse;
 }
+
 @keyframes blinkBox {
   0% {
     box-shadow: 0 0 10px rgba(255, 247, 0, 0);
