@@ -1,0 +1,19 @@
+import styles from "./homeComponents.module.scss";
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
+export default function ScrollHint() {
+  return (
+    <div className={cx("ScrollHint")}>
+      <div className={cx("wrapper")}>
+        <div className={cx("text")}>위 아래로</div>
+        <div className={cx("text")}>Scroll!</div>
+      </div>
+      <img className={cx("scroll")} src="assets/icon/arrow_scroll_1.png" />
+      <img
+        className={cx("scroll", "mini")}
+        src="assets/icon/arrow_scroll_2.png"
+      />
+    </div>
+  );
+}

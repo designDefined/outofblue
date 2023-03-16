@@ -94,9 +94,13 @@
   color: white;
   padding: 40px;
   overflow-y: auto;
+  transition: 1s ease;
 
   &.open {
     display: block;
+  }
+  &.scrollHint {
+    background: rgba(black, 0);
   }
 }
 .title {
@@ -204,5 +208,70 @@
     width: 70%;
     height: 25%;
     transform: scaleX(-1);
+  }
+}
+
+.ScrollHint {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: 7s ease disappear;
+  opacity: 0;
+  .scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &.mini {
+      opacity: 0;
+      animation: 7s ease arrowBlink;
+    }
+  }
+  .wrapper {
+    position: absolute;
+    top: 28%;
+    left: 18%;
+    width: 50%;
+    height: 50%;
+    background: rgba(black, 0.5);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "GyeonggiTitleM", sans-serif;
+    font-size: 24px;
+    .text {
+      transform: translateX(12%);
+    }
+  }
+  @keyframes arrowBlink {
+    10%,
+    30%,
+    35% {
+      opacity: 1;
+    }
+    0%,
+    20%,
+    45% {
+      opacity: 0;
+    }
+  }
+  @keyframes disappear {
+    0%,
+    20%,
+    35% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0;
+    }
   }
 }

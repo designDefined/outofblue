@@ -35,6 +35,7 @@ import { useAudioStore } from "@/store/audioStore";
 import { LpPlayer } from "@/components/home/CustomProp";
 import Greeting from "@/components/home/Greeting";
 import { useMuteStore } from "@/store/muteStore";
+import ScrollHint from "@/components/home/ScrollHint";
 
 const cx = classNames.bind(styles);
 
@@ -201,13 +202,13 @@ export default function Home() {
             fill
           />
           <Image
-            className={cx("prop", "mobileOnly", "blink1")}
+            className={cx("prop", "mobileOnly", "blink3")}
             src={sup_smoke1_mobile}
             alt="incense smoke 1"
             fill
           />
           <Image
-            className={cx("prop", "mobileOnly", "blink2")}
+            className={cx("prop", "mobileOnly", "blink4")}
             src={sup_smoke2_mobile}
             alt="incense smoke 2"
             fill

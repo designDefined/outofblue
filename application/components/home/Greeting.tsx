@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import arrow1 from "public/assets/greet/arrow1.png";
 import arrow2 from "public/assets/greet/arrow1.png";
+import ScrollHint from "@/components/home/ScrollHint";
 
 const greetingTitle = "아웃오브블루의 공간 ‘The Blue Room’";
 const greetingData = [
@@ -40,6 +41,7 @@ const greetingMobile = [
 const cx = classNames.bind(styles);
 export default function Greeting() {
   const [open, setOpen] = useState(false);
+  const [scrollHint, setScrollHint] = useState(false);
   const [page, setPage] = useState(0);
   useEffect(() => {
     const session = sessionStorage.getItem("greeting");
@@ -47,9 +49,16 @@ export default function Greeting() {
       setOpen(true);
     }
   }, []);
+  useEffect(() => {
+    if (scrollHint) {
+      window.setTimeout(() => {
+        setOpen(false);
+      }, 3150);
+    }
+  }, [scrollHint]);
   return (
     <div
-      className={cx("Greeting", { open })}
+      className={cx("Greeting", { open, scrollHint })}
       onScroll={(e) => e.stopPropagation()}
     >
       <div className={cx("container", "pcOnly")}>
@@ -65,47 +74,51 @@ export default function Greeting() {
           닫기
         </div>
       </div>
-      <div className={cx("container", "mobileOnly")}>
-        {page === 2 && (
-          <img className={cx("arrow1")} src="assets/greet/arrow1.png" />
-        )}
-        {page === 3 && (
-          <img className={cx("arrow2")} src="assets/greet/arrow1.png" />
-        )}
-        {page === 6 && (
-          <img className={cx("arrow3")} src="assets/greet/arrow1.png" />
-        )}
-        {<div className={cx("text")}>{greetingMobile[page]}</div>}
-        {
-          <div className={cx("buttons")}>
-            <button
-              className={cx("button", { invisible: page === 0 })}
-              onClick={() => setPage(page - 1)}
-            >
-              <img src={"assets/icon/arrow_left.png"} />
-              이전
-            </button>
-            {page === greetingMobile.length - 1 ? (
-              <div
-                className={cx("button")}
-                onClick={() => {
-                  setPage(0);
-                  setOpen(false);
-                }}
-              >
-                닫기
-              </div>
-            ) : (
+      {scrollHint ? (
+        <ScrollHint />
+      ) : (
+        <div className={cx("container", "mobileOnly")}>
+          {page === 2 && (
+            <img className={cx("arrow1")} src="assets/greet/arrow1.png" />
+          )}
+          {page === 3 && (
+            <img className={cx("arrow2")} src="assets/greet/arrow1.png" />
+          )}
+          {page === 6 && (
+            <img className={cx("arrow3")} src="assets/greet/arrow1.png" />
+          )}
+          {<div className={cx("text")}>{greetingMobile[page]}</div>}
+          {
+            <div className={cx("buttons")}>
               <button
-                className={cx("button")}
-                onClick={() => setPage(page + 1)}
+                className={cx("button", { invisible: page === 0 })}
+                onClick={() => setPage(page - 1)}
               >
-                다음 <img src="assets/icon/arrow_right.png" />
+                <img src={"assets/icon/arrow_left.png"} />
+                이전
               </button>
-            )}
-          </div>
-        }
-      </div>
+              {page === greetingMobile.length - 1 ? (
+                <div
+                  className={cx("button")}
+                  onClick={() => {
+                    setPage(0);
+                    setScrollHint(true);
+                  }}
+                >
+                  닫기
+                </div>
+              ) : (
+                <button
+                  className={cx("button")}
+                  onClick={() => setPage(page + 1)}
+                >
+                  다음 <img src="assets/icon/arrow_right.png" />
+                </button>
+              )}
+            </div>
+          }
+        </div>
+      )}
     </div>
   );
 }
