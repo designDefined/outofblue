@@ -25,6 +25,8 @@ import sup_lp_mobile from "public/assets/background/home_mobile/sup_LP_mobile.pn
 import sup_fire1_mobile from "public/assets/background/home_mobile/sup_fire1_mobile.png";
 import sup_fire2_mobile from "public/assets/background/home_mobile/sup_fire2_mobile.png";
 import sup_chair_mobile from "public/assets/background/home_mobile/sup_chair_mobile.png";
+import sup_smoke1_mobile from "public/assets/background/home_mobile/sup_smoke1_mobile.png";
+import sup_smoke2_mobile from "public/assets/background/home_mobile/sup_smoke2_mobile.png";
 
 import RouteButton from "@/components/home/RouteButton";
 import { getVideoURL } from "@/functions";
@@ -195,7 +197,19 @@ export default function Home() {
           <Image
             className={cx("prop", "mobileOnly")}
             src={sup_chair_mobile}
-            alt="chair "
+            alt="chair"
+            fill
+          />
+          <Image
+            className={cx("prop", "mobileOnly", "blink1")}
+            src={sup_smoke1_mobile}
+            alt="incense smoke 1"
+            fill
+          />
+          <Image
+            className={cx("prop", "mobileOnly", "blink2")}
+            src={sup_smoke2_mobile}
+            alt="incense smoke 2"
             fill
           />
         </div>
