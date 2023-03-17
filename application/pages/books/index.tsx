@@ -1,7 +1,8 @@
 import styles from "./Books.module.scss";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import thumbnail_outOfBlue from "public/assets/background/books/book_outofBlue/thumbnail.png";
 import cover_outOfBlue from "public/assets/background/books/book_outofBlue/cover_main.png";
 import front_outOfBlue from "public/assets/background/books/book_outofBlue/cover_front.png";
 import back_outOfBlue from "public/assets/background/books/book_outofBlue/cover_back.png";
@@ -23,7 +24,9 @@ type BookData = {
   title: string;
   subTitle: string;
   content: string;
+  thumbnail: StaticImageData;
   pages: StaticImageData[];
+  link: string;
 };
 
 const outOfBluePreview = [
@@ -50,7 +53,9 @@ const data: BookData[] = [
       "\n" +
       "경계를 열어두고 다양한 분야에서 창작 활동을 하는 아웃오브블루의 삶과 가장 밀접한 글이자,\n" +
       "누구나 일상 속에서 공감할 수 있는 위트와 철학이 담긴 시적 에세이",
+    thumbnail: thumbnail_outOfBlue,
     pages: outOfBluePreview,
+    link: "https://smartstore.naver.com/theblueroom/products/8202198583",
   },
   /*
   {
@@ -81,8 +86,13 @@ const data: BookData[] = [
 ];
 export default function Books() {
   const [displayBubble, setDisplayBubble] = useState(false);
-  const [currentBook, setCurrentBook] = useState<BookData | null>(null);
+  const [currentBook, setCurrentBook] = useState<BookData>(data[0]);
   const [reading, setReading] = useState<number | false>(false);
+
+  useLayoutEffect(() => {
+    if (window.innerWidth < 1024) setDisplayBubble(true);
+  }, []);
+
   return (
     <main className={cx("main")}>
       <div className={cx("content")}>
@@ -92,12 +102,19 @@ export default function Books() {
             setDisplayBubble(true);
           }}
         />
+        <div className={cx("bookWrapper")}>
+          <Image
+            src={currentBook.thumbnail}
+            alt={`thumbnail of ${currentBook.title}`}
+            fill
+          />
+        </div>
       </div>
       {displayBubble && (
         <div
           className={cx("bubbleWrapper")}
           onClick={() => {
-            setDisplayBubble(false);
+            if (window.innerWidth >= 1024) setDisplayBubble(false);
           }}
         >
           <div
@@ -111,7 +128,7 @@ export default function Books() {
                 <div className={cx("coverWrapper")}>
                   <Image
                     src={book.cover}
-                    alt={`Album cover of ${book.title}`}
+                    alt={`Book cover of ${book.title}`}
                     quality={10}
                     fill
                   />
@@ -119,12 +136,22 @@ export default function Books() {
                     className={cx("bookOverlay", {
                       on: currentBook?.id === book.id,
                     })}
-                    onClick={() => {
-                      setCurrentBook(book);
-                      setReading(0);
-                    }}
                   >
-                    {currentBook?.id === book.id ? "계속 읽기" : "읽기"}
+                    <button
+                      onClick={() => {
+                        setCurrentBook(book);
+                        setReading(0);
+                      }}
+                    >
+                      책 읽어보기
+                    </button>
+                    <button
+                      onClick={() => {
+                        window.open(book.link);
+                      }}
+                    >
+                      구매
+                    </button>
                   </div>
                 </div>
                 <div className={cx("textWrapper")}>

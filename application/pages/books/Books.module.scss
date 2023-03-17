@@ -3,6 +3,23 @@
 @use "./styles/responsive";
 
 .content {
+  .bookWrapper {
+    position: absolute;
+    top: 63.7%;
+    left: 47.5%;
+    width: 10%;
+    height: 37.5%;
+    transform: rotate(73.5deg);
+
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      background-color: rgba(98, 98, 98, 0.3);
+      img {
+        opacity: 0.8;
+      }
+    }
+  }
   .coverButton {
     position: absolute;
     width: 15.8%;
@@ -227,6 +244,9 @@
     }
     .bookOverlay {
       margin-top: 10px;
+      width: 200%;
+      display: flex;
+      justify-content: space-around;
       button {
         font: inherit;
         border: #76a676 solid 3px;
@@ -235,6 +255,12 @@
         padding: 4px 8px;
         border-radius: 4px;
         margin: 0 5px;
+      }
+      &.on {
+        button {
+          background: #76a676;
+          color: white;
+        }
       }
     }
 

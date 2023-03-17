@@ -101,7 +101,7 @@
             border: none;
             cursor: pointer;
             color: white;
-
+            word-break: keep-all;
             &:hover {
               font-weight: 600;
               color: gray;
@@ -187,6 +187,7 @@
     align-items: center;
     //  background-color: #76a676;
     background-color: rgba(234, 192, 175);
+    overflow-x: hidden;
   }
   .content {
     @include sizing.mobileContent(background.$bg-tv);
@@ -219,6 +220,10 @@
     }
     .videoOverlay {
       margin-bottom: 10px;
+      display: flex;
+      justify-content: space-around;
+      word-break: keep-all;
+
       button {
         font: inherit;
         border: #76a676 solid 3px;
@@ -227,6 +232,12 @@
         padding: 4px 8px;
         border-radius: 4px;
         margin-right: 5px;
+      }
+      &.on {
+        button {
+          background: #76a676;
+          color: white;
+        }
       }
     }
 

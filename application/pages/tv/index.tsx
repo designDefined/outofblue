@@ -1,7 +1,7 @@
 import styles from "./Tv.module.scss";
 import classNames from "classnames/bind";
 import { getVideoURL } from "@/functions";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import sup_flower from "public/assets/background/tv/sup_flower.png";
 import { useVideoStore } from "@/store/videoStore";
@@ -75,8 +75,9 @@ export default function Tv() {
   const [displayBubble, setDisplayBubble] = useState(false);
   const setAudioPlaying = useAudioStore((state) => state.setPlaying);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!currentVideoName) setCurrentVideoName("liebesKamel");
+    if (window.innerWidth < 1024) setDisplayBubble(true);
   }, []);
 
   return (
@@ -121,39 +122,25 @@ export default function Tv() {
                         on: currentVideoName === videoName,
                       })}
                     >
-                      {currentVideoName === videoName ? (
-                        <button
-                          onClick={() => {
-                            setMuted(false);
+                      <button
+                        onClick={() => {
+                          setCurrentVideoName(videoName);
+                          setMuted(false);
+                          setAudioPlaying(false);
+                          if (window.innerWidth >= 1024)
                             setDisplayBubble(false);
-                            setAudioPlaying(false);
-                            videoRef.current?.play();
-                          }}
-                        >
-                          계속 재생
-                        </button>
-                      ) : (
-                        <>
-                          <button
-                            onClick={() => {
-                              setCurrentVideoName(videoName);
-                              setMuted(false);
-                              setDisplayBubble(false);
-                              setAudioPlaying(false);
-                              //videoRef.current?.play();
-                            }}
-                          >
-                            재생
-                          </button>
-                          <button
-                            onClick={() => {
-                              window.open(link);
-                            }}
-                          >
-                            링크
-                          </button>
-                        </>
-                      )}
+                          //videoRef.current?.play();
+                        }}
+                      >
+                        Tv로 클립 보기
+                      </button>
+                      <button
+                        onClick={() => {
+                          window.open(link);
+                        }}
+                      >
+                        FULL 영상 보러가기
+                      </button>
                     </div>
                   </div>
                   <div className={cx("textWrapper")}>
