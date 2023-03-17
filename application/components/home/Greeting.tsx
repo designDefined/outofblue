@@ -45,7 +45,7 @@ export default function Greeting() {
   const [page, setPage] = useState(0);
   useEffect(() => {
     const session = sessionStorage.getItem("greeting");
-    if (!session) {
+    if (!(session && JSON.parse(session))) {
       setOpen(true);
     }
   }, []);
@@ -53,6 +53,7 @@ export default function Greeting() {
     if (scrollHint) {
       window.setTimeout(() => {
         setOpen(false);
+        sessionStorage.setItem("greeting", JSON.stringify(true));
       }, 3150);
     }
   }, [scrollHint]);

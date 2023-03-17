@@ -96,12 +96,14 @@
           display: flex;
           align-items: center;
           justify-content: space-evenly;
+          word-break: keep-all;
+
           &.on {
             visibility: visible;
           }
           button {
             font-family: "GyeonggiTitleM", sans-serif;
-            font-size: 28px;
+            font-size: 20px;
             background: none;
             border: none;
             cursor: pointer;
@@ -231,6 +233,10 @@
     }
     .audioOverlay {
       margin-top: 10px;
+      width: 200%;
+      display: flex;
+      justify-content: space-around;
+
       button {
         font: inherit;
         border: #76a676 solid 3px;
@@ -239,6 +245,13 @@
         padding: 4px 8px;
         border-radius: 4px;
         margin: 0 5px;
+        word-break: keep-all;
+      }
+      &.on {
+        button {
+          background: #76a676;
+          color: white;
+        }
       }
     }
 
