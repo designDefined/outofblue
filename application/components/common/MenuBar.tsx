@@ -12,17 +12,19 @@ export default function MenuBar() {
   const router = useRouter();
   const mute = useMuteStore((state) => state.mute);
   const setMute = useMuteStore((state) => state.setMute);
-
+  const volume = useMuteStore((state) => state.volume);
+  const setVolume = useMuteStore((state) => state.setVolume);
   return (
     <div className={cx("MenuBar")}>
-      <button
-        onClick={() => {
-          router.push("/");
-        }}
-      >
-        <Image src={icon_home} alt={"home icon"} fill />
-      </button>
-
+      {!mute && (
+        <input
+          type="range"
+          value={volume * 10}
+          onChange={(e) => setVolume(Number(e.target.value) / 10)}
+          min={0}
+          max={10}
+        />
+      )}
       <button>
         {mute ? (
           <Image
@@ -43,6 +45,13 @@ export default function MenuBar() {
             }}
           />
         )}
+      </button>
+      <button
+        onClick={() => {
+          router.push("/");
+        }}
+      >
+        <Image src={icon_home} alt={"home icon"} fill />
       </button>
     </div>
   );

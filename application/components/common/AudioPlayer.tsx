@@ -9,12 +9,18 @@ const AudioPlayer = () => {
     (state) => state,
   );
   const mute = useMuteStore((state) => state.mute);
+  const volume = useMuteStore((state) => state.volume);
 
   useEffect(() => {
     if (ref.current) {
       setAudioRef(ref.current);
     }
   }, []);
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.volume = volume;
+    }
+  }, [volume, ref]);
 
   useEffect(() => {
     if (playing) {

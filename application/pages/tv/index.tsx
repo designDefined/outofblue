@@ -67,18 +67,25 @@ const data: {
 
 export default function Tv() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const globalMute = useMuteStore((state) => state.mute);
-  const [muted, setMuted] = useState(true);
   const { currentVideoName, setCurrentVideoName } = useVideoStore(
     (state) => state,
   );
   const [displayBubble, setDisplayBubble] = useState(false);
   const setAudioPlaying = useAudioStore((state) => state.setPlaying);
+  const mute = useMuteStore((state) => state.mute);
+  const setMute = useMuteStore((state) => state.setMute);
+  const volume = useMuteStore((state) => state.volume);
 
   useLayoutEffect(() => {
     if (!currentVideoName) setCurrentVideoName("liebesKamel");
     if (window.innerWidth < 1024) setDisplayBubble(true);
   }, []);
+
+  useLayoutEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume;
+    }
+  }, [volume, videoRef]);
 
   return (
     <main className={cx("main")}>
@@ -94,7 +101,7 @@ export default function Tv() {
             <video
               ref={videoRef}
               src={getVideoURL(currentVideoName, 1920)}
-              muted={muted || globalMute}
+              muted={mute}
               autoPlay
               loop
               playsInline
@@ -125,11 +132,10 @@ export default function Tv() {
                       <button
                         onClick={() => {
                           setCurrentVideoName(videoName);
-                          setMuted(false);
                           setAudioPlaying(false);
+
                           if (window.innerWidth >= 1024)
                             setDisplayBubble(false);
-                          //videoRef.current?.play();
                         }}
                       >
                         Tv로 클립 보기

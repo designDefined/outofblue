@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import Head from "next/head";
 import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import sup_books_pc from "../public/assets/background/home_pc/sup_books_pc.png";
 import sup_mailbox_pc from "../public/assets/background/home_pc/sup_mailbox_pc.png";
 import sup_LP_pc from "../public/assets/background/home_pc/sup_LP_pc.png";
@@ -102,9 +102,11 @@ export default function Home() {
   const [transitionStyle, setTransitionStyle] = useState<
     { transform: string; opacity: number } | {}
   >({});
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const currentVideoName = useVideoStore((state) => state.currentVideoName);
   const currentAudio = useAudioStore((state) => state.currentTrack);
   const mute = useMuteStore((state) => state.mute);
+  const volume = useMuteStore((state) => state.volume);
 
   const startTransitionTo = (path: string, x: number, y: number) => {
     return () => {
@@ -115,6 +117,12 @@ export default function Home() {
       setTimeout(() => router.push(`/${path}`), 1000);
     };
   };
+
+  useLayoutEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume;
+    }
+  }, [volume, videoRef]);
 
   return (
     <>
@@ -141,6 +149,7 @@ export default function Home() {
             >
               {currentVideoName && (
                 <video
+                  ref={videoRef}
                   src={getVideoURL(currentVideoName, 480)}
                   muted={mute || currentAudio !== null}
                   autoPlay
