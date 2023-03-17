@@ -12,20 +12,19 @@
 }
 @include responsive.desktop {
   .MenuBar {
-    height: 4%;
     bottom: 0;
 
     input {
-      width: 25vw;
+      width: 8vw;
     }
     button {
       position: relative;
-      width: 8vw;
+      width: 2vw;
       aspect-ratio: 1/1;
       background: none;
       border: none;
       cursor: pointer;
-      margin: 0 8px;
+      margin: 8px 8px;
       &:hover {
         background-color: rgba(black, 0.5);
       }

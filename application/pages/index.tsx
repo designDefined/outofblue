@@ -171,15 +171,43 @@ export default function Home() {
               isPc
             />
           ))}
-          {mobileRoutes.map(({ source, path, drawRect, zoomIn }) => (
-            <RouteButton
-              key={path}
-              source={source}
-              drawRect={drawRect}
-              callBackFunction={startTransitionTo(path, zoomIn[0], zoomIn[1])}
-              isPc={false}
-            />
-          ))}
+          <RouteButton
+            source={sup_woods_pc}
+            drawRect={[0, 0, 0, 0]}
+            callBackFunction={() => {}}
+            isPc={true}
+          />
+          <RouteButton
+            source={sup_guitar_pc}
+            drawRect={[0, 0, 0, 0]}
+            callBackFunction={() => {}}
+            isPc={true}
+          />
+          <Image
+            className={cx("prop", "pcOnly", "blink1")}
+            src={sup_fire1_pc}
+            alt="cup"
+            fill={true}
+          />
+          <Image
+            className={cx("prop", "pcOnly", "blink2")}
+            src={sup_fire2_pc}
+            alt="cup"
+            fill={true}
+          />
+          <Image
+            className={cx("prop", "pcOnly", "blink3")}
+            src={sup_smoke1_pc}
+            alt="cup"
+            fill={true}
+          />
+          <Image
+            className={cx("prop", "pcOnly", "blink4")}
+            src={sup_smoke2_pc}
+            alt="cup"
+            fill={true}
+          />
+
           <Image
             className={cx("prop", "pcOnly")}
             src={sup_cup_pc}
@@ -189,9 +217,19 @@ export default function Home() {
           <Image
             className={cx("prop", "pcOnly")}
             src={sup_bookCover_pc}
-            alt="cup"
+            alt="bookCover"
             fill={true}
           />
+          {mobileRoutes.map(({ source, path, drawRect, zoomIn }) => (
+            <RouteButton
+              key={path}
+              source={source}
+              drawRect={drawRect}
+              callBackFunction={startTransitionTo(path, zoomIn[0], zoomIn[1])}
+              isPc={false}
+            />
+          ))}
+
           <Image
             className={cx("prop", "mobileOnly", "blink1")}
             src={sup_fire1_mobile}
