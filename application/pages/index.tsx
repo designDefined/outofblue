@@ -229,7 +229,13 @@ export default function Home() {
               isPc={false}
             />
           ))}
-
+          <RouteButton
+            className={cx("guitar")}
+            source={sup_guitar_pc}
+            drawRect={[0, 0, 0, 0]}
+            callBackFunction={() => {}}
+            isPc={false}
+          />
           <Image
             className={cx("prop", "mobileOnly", "blink1")}
             src={sup_fire1_mobile}

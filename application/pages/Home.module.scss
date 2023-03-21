@@ -110,6 +110,13 @@
       }
     }
   }
+  .guitar {
+    position: absolute;
+    top: 10% !important;
+    left: -30% !important;
+    width: 160% !important;
+    height: 60% !important;
+  }
 }
 .blink1 {
   animation: 2s linear infinite blinkOpacityFire alternate;

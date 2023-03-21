@@ -10,6 +10,7 @@ type Props = {
   drawRect: [number, number, number, number];
   callBackFunction: () => void;
   isPc: boolean;
+  className?: string;
 };
 
 export default function RouteButton({
@@ -17,6 +18,7 @@ export default function RouteButton({
   drawRect,
   callBackFunction,
   isPc,
+  className,
 }: Props) {
   const [left, top, width, height] = drawRect.map((num) => `${num}%`);
   const [buttonState, setButtonState] = useState({
@@ -27,7 +29,11 @@ export default function RouteButton({
   return (
     <>
       <Image
-        className={cx("prop", buttonState, { pcOnly: isPc, mobileOnly: !isPc })}
+        className={cx("prop", buttonState, {
+          pcOnly: isPc,
+          mobileOnly: !isPc,
+          [className ?? "noClass"]: className !== undefined,
+        })}
         src={source}
         alt={`routing button`}
         fill={true}

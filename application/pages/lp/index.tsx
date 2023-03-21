@@ -15,7 +15,6 @@ const data: TrackData[] = [
   {
     id: 0,
     audioName: "liebesKamel",
-    link: "https://youtu.be/JFgIHB67iXM",
     cover: cover_liebesKamel,
     title: "친애하는 낙타에게",
     subTitle: "Liebes Kamel, 2022",
@@ -29,11 +28,19 @@ const data: TrackData[] = [
       "\n" +
       "알렉산더 테크닉 선생님들과 함께 작업한 " +
       "평안하고 따듯한 음악",
+    links: {
+      melon: "https://bit.ly/3wxa9dB",
+      genie: "https://bit.ly/3AkRxie",
+      bugs: "https://bit.ly/3PODlU4",
+      flo: "https://bit.ly/3CyWpCX",
+      vibe: "https://bit.ly/3wsVss3",
+      apple: "https://apple.co/3AISjHc",
+      youtube: "https://bit.ly/3TrSXQP",
+    },
   },
   {
     id: 1,
     audioName: "ifNoLove",
-    link: "https://youtu.be/WliLXAyqpKs",
     cover: cover_ifNoLove,
     title: "사랑이 없다면",
     subTitle: "If No Love 2022",
@@ -43,19 +50,36 @@ const data: TrackData[] = [
       "- 움베르토 에코 <장미의 이름> 中 \n" +
       "\n" +
       "위태로운 사랑의 존재를 담은 에너제틱한 사랑노래",
+    links: {
+      melon: "https://bit.ly/3uIeSsk",
+      genie: "https://bit.ly/3JHnXWH",
+      bugs: "https://bit.ly/3EhIOid",
+      flo: "https://bit.ly/3JHnYKf",
+      vibe: "https://bit.ly/3KJv0zj",
+      apple: "https://apple.co/3xuti1e",
+      youtube: "https://bit.ly/3JDC3Za",
+    },
   },
   {
     id: 2,
     audioName: "myPromise",
     cover: cover_myPromise,
     title: "나의 약속",
-    link: "https://youtu.be/sNlemNl4HZM",
     subTitle: "My Promise 2022",
     content:
       "10살, 15살 아웃오브블루가 적어둔 일기를 모티브로 작업한 " +
       "자전적인 이야기\n" +
       "\n" +
       "‘사람들은 자기가 원하는 모습대로 살아가길 원하고, 아직 살아보지 않은 시간에 적어둔 나의 미래는 발자국이 한 번도 남겨지지 않은 설원처럼 아주 창창하고 팽팽하더라구요. 그걸 한 조각 마음에 품고 지금을 살아가면, 오늘의 발걸음이 조금은 더 힘차지 않을까. 뭐 그런 생각으로 장난스럽게 적어두었던 곡입니다. 1절은 초등학교 3학년 때의 일기이고, 2절은 중학교 2학년 때 그 일기장 뒷편에 적어두었던 저의 편지입니다.’",
+    links: {
+      melon: "https://bit.ly/3s9EUCl",
+      genie: "https://bit.ly/3rm07K4",
+      bugs: "https://bit.ly/3J3iOIL",
+      flo: "https://bit.ly/3B17gCT",
+      vibe: "https://bit.ly/3GhSysl",
+      apple: "https://apple.co/3HoVlRP",
+      youtube: "https://bit.ly/3glMJzj",
+    },
   },
 ];
 
@@ -65,7 +89,7 @@ export default function Lp() {
   const playing = useAudioStore((state) => state.playing);
   const setPlaying = useAudioStore((state) => state.setPlaying);
   const setMute = useMuteStore((state) => state.setMute);
-
+  const [displayLinkBubble, setDisplayLinkBubble] = useState(-1);
   const [displayBubble, setDisplayBubble] = useState(false);
 
   useLayoutEffect(() => {
@@ -122,6 +146,7 @@ export default function Lp() {
                     })}
                   >
                     <button
+                      className={cx("playButton")}
                       onClick={() => {
                         setCurrentTrack(track);
                         setPlaying(true);
@@ -129,15 +154,82 @@ export default function Lp() {
                         setMute(false);
                       }}
                     >
-                      1분 듣기
+                      {currentTrack?.audioName === track.audioName
+                        ? " ▶"
+                        : "1분 듣기"}
                     </button>
                     <button
                       onClick={() => {
-                        window.open(track.link);
+                        //                        window.open(track.link);
+                        displayLinkBubble === track.id
+                          ? setDisplayLinkBubble(-1)
+                          : setDisplayLinkBubble(track.id);
                       }}
                     >
                       FULL 음원 들으러 가기
                     </button>
+                    {displayLinkBubble === track.id && (
+                      <div className={cx("linkBubble")}>
+                        <div className={cx("links")}>
+                          <a
+                            className={cx("link")}
+                            href={track.links.melon}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            🎧 Melon
+                          </a>
+                          <a
+                            className={cx("link")}
+                            href={track.links.genie}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            🎧 Genie
+                          </a>
+                          <a
+                            className={cx("link")}
+                            href={track.links.bugs}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            🎧 Bugs
+                          </a>
+                          <a
+                            className={cx("link")}
+                            href={track.links.youtube}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            🎧 Youtube Music
+                          </a>
+                          <a
+                            className={cx("link")}
+                            href={track.links.apple}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            🎧 Apple Music
+                          </a>
+                          <a
+                            className={cx("link")}
+                            href={track.links.flo}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            🎧 FLO
+                          </a>
+                          <a
+                            className={cx("link")}
+                            href={track.links.vibe}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            🎧 VIBE
+                          </a>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className={cx("textWrapper")}>
