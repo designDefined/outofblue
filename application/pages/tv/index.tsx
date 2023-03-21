@@ -94,7 +94,7 @@ export default function Tv() {
           className={cx("tvWrapper")}
           onClick={() => {
             setDisplayBubble(true);
-            videoRef.current?.pause();
+            if (window.innerWidth >= 1024) videoRef.current?.pause();
           }}
         >
           {currentVideoName && (
@@ -130,10 +130,10 @@ export default function Tv() {
                       })}
                     >
                       <button
+                        className={cx("playButton")}
                         onClick={() => {
                           setCurrentVideoName(videoName);
                           setAudioPlaying(false);
-
                           if (window.innerWidth >= 1024)
                             setDisplayBubble(false);
                         }}

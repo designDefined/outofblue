@@ -112,22 +112,31 @@
   }
 }
 .blink1 {
-  animation: 5s ease infinite blinkOpacity alternate;
+  animation: 2s linear infinite blinkOpacityFire alternate;
 }
 .blink2 {
-  animation: 5s ease infinite blinkOpacity alternate-reverse;
+  animation: 3s linear infinite blinkOpacityFire alternate-reverse;
 }
 .blink3 {
-  animation: 10s ease infinite blinkOpacity2 alternate;
+  animation: 8s ease infinite blinkOpacity alternate;
 }
 .blink4 {
-  animation: 10s ease infinite blinkOpacity2 alternate-reverse;
+  animation: 8s ease infinite blinkOpacity alternate-reverse;
+}
+@keyframes blinkOpacityFire {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+  //    animation: 1s ease infinite blink alternate-reverse;
 }
 @keyframes blinkOpacity {
   0% {
     opacity: 0;
   }
-  25% {
+  12.5% {
     opacity: 0;
   }
   100% {

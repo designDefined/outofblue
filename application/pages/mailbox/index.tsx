@@ -30,12 +30,18 @@ export default function Mailbox() {
             className={cx("mailContainer")}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={cx("mailHint")}>This is the Post Box</div>
+            <div className={cx("mailHint")}>"Hi! I'm the Post Box"</div>
             <div className={cx("mailInputWrapper")}>
               하실 말씀이 있으시다면 이 곳에 남겨주세요! Please leave a message!
-              <div className={cx("mailWarning")}>
-                메일 보내기 기능은 아직 준비 중입니다
-              </div>
+            </div>
+            <button className={cx("sendButton")}>보내기</button>
+            <div className={cx("mailWarning")}>
+              쪽지 보내기 기능은 <br />
+              <br />
+              아직 준비 중입니다!
+              <br />
+              <br />
+              :)
             </div>
           </div>
         </div>

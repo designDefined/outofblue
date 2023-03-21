@@ -51,7 +51,7 @@ const data: BookData[] = [
     content:
       "떠오르는 대로의 단편적인 생각들을 모은 '아웃오브블루'의 첫 단상집\n" +
       "\n" +
-      "경계를 열어두고 다양한 분야에서 창작 활동을 하는 아웃오브블루의 삶과 가장 밀접한 글이자,\n" +
+      "경계를 열어두고 다양한 분야에서 창작 활동을 하는 아웃오브블루의 삶과 가장 밀접한 글이자, " +
       "누구나 일상 속에서 공감할 수 있는 위트와 철학이 담긴 시적 에세이",
     thumbnail: thumbnail_outOfBlue,
     pages: outOfBluePreview,
@@ -183,7 +183,20 @@ export default function Books() {
                 이전
               </button>
               <div
-                className={cx("pageWrapper")}
+                className={cx("pageWrapper", "mobileOnly")}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {reading * 2 < currentBook.pages.length && (
+                  <Image
+                    src={currentBook.pages[reading]}
+                    alt={`${currentBook.title} page ${reading}`}
+                    objectFit={"contain"}
+                    fill
+                  />
+                )}
+              </div>
+              <div
+                className={cx("pageWrapper", "pcOnly")}
                 onClick={(e) => e.stopPropagation()}
               >
                 {reading * 2 < currentBook.pages.length && (
