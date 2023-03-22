@@ -1,6 +1,7 @@
 @use "./styles/sizing";
 @use "./styles/background";
 @use "./styles/responsive";
+@use "./styles/animation";
 
 .main {
 }
@@ -15,6 +16,9 @@
     transform: skewX(-7deg);
     cursor: pointer;
     transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       background-color: rgba(98, 98, 98, 0.3);
       img {
@@ -31,6 +35,17 @@
     filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
   }
 }
+
+.clickHint {
+  position: absolute;
+  font-weight: 800;
+  color: white;
+  font-size: 28px;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  z-index: 80;
+  opacity: 0;
+}
+
 @include responsive.desktop {
   .main {
     @include sizing.subContainer(150vh);
@@ -39,6 +54,12 @@
   }
   .content {
     @include sizing.subContent(background.$bg-lp);
+  }
+  .lpWrapper {
+    @include animation.boxBlinkTwice;
+    .clickHint {
+      @include animation.clickBlinkTwice;
+    }
   }
   .bubbleWrapper {
     position: absolute;

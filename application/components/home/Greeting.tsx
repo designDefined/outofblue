@@ -40,7 +40,7 @@ const greetingMobile = [
 
 const cx = classNames.bind(styles);
 export default function Greeting() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [scrollHint, setScrollHint] = useState(false);
   const [page, setPage] = useState(0);
   useEffect(() => {

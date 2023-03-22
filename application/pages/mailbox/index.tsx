@@ -17,7 +17,9 @@ export default function Mailbox() {
           onClick={() => {
             setDisplayBubble(true);
           }}
-        />
+        >
+          <div className={cx("clickHint")}>click!</div>
+        </div>
       </div>
       {displayBubble && (
         <div

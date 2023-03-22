@@ -30,7 +30,7 @@ import sup_smoke2_mobile from "public/assets/background/home_mobile/sup_smoke2_m
 import sup_woods_mobile from "public/assets/background/home_mobile/sup_woods_mobile.png";
 
 import RouteButton from "@/components/home/RouteButton";
-import { getVideoURL } from "@/functions";
+import { getGuitarURL, getVideoURL } from "@/functions";
 import { useVideoStore } from "@/store/videoStore";
 import { useAudioStore } from "@/store/audioStore";
 import { LpPlayer } from "@/components/home/CustomProp";
@@ -105,6 +105,8 @@ export default function Home() {
     { transform: string; opacity: number } | {}
   >({});
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [audioEffect, setAudioEffect] = useState<1 | 2 | 3 | 4>(1);
   const currentVideoName = useVideoStore((state) => state.currentVideoName);
   const currentAudio = useAudioStore((state) => state.currentTrack);
   const mute = useMuteStore((state) => state.mute);
@@ -161,6 +163,7 @@ export default function Home() {
                   playsInline
                 />
               )}
+              <div className={cx("clickHint")}>click!</div>
             </div>
           </div>
           <div className={cx("lpWrapper")}>
@@ -186,7 +189,18 @@ export default function Home() {
           <RouteButton
             source={sup_guitar_pc}
             drawRect={[30, 49, 10, 36]}
-            callBackFunction={() => {}}
+            callBackFunction={() => {
+              const guitarNum = (Math.floor(Math.random() * 4) + 1) as
+                | 1
+                | 2
+                | 3
+                | 4;
+              audioRef.current?.pause();
+              setAudioEffect(guitarNum);
+              setTimeout(() => {
+                audioRef.current?.play();
+              }, 1);
+            }}
             isPc={true}
           />
           {ambiencePlaying && (
@@ -251,9 +265,21 @@ export default function Home() {
             className={cx("guitar")}
             source={sup_guitar_pc}
             drawRect={[16, 40, 20, 22]}
-            callBackFunction={() => {}}
+            callBackFunction={() => {
+              const guitarNum = (Math.floor(Math.random() * 4) + 1) as
+                | 1
+                | 2
+                | 3
+                | 4;
+              audioRef.current?.pause();
+              setAudioEffect(guitarNum);
+              setTimeout(() => {
+                audioRef.current?.play();
+              }, 1);
+            }}
             isPc={false}
           />
+          <audio ref={audioRef} src={getGuitarURL(audioEffect)} muted={mute} />
           {ambiencePlaying && (
             <>
               <Image

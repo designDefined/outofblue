@@ -113,9 +113,10 @@ export default function Lp() {
               quality={30}
             />
           )}
+          <div className={cx("clickHint")}>click!</div>
         </div>
         {currentTrack && (
-          <Image className={cx("prop")} src={sup_lp} alt={"flower"} fill />
+          <Image className={cx("prop")} src={sup_lp} alt={"lp"} fill />
         )}
       </div>
       {displayBubble && (

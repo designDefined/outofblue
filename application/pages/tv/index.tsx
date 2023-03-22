@@ -107,11 +107,21 @@ export default function Tv() {
               playsInline
             />
           )}
+          <div className={cx("clickHint")}>click!</div>
         </div>
         <Image className={cx("prop")} src={sup_flower} alt={"lp"} />
       </div>
       {displayBubble && (
         <div className={cx("bubbleWrapper")}>
+          <button
+            className={cx("close", "pcOnly")}
+            onClick={() => {
+              setDisplayBubble(false);
+              videoRef.current?.play();
+            }}
+          >
+            닫기
+          </button>
           <div className={cx("list")}>
             {data.map(
               ({ id, videoName, subTitle, title, credit, content, link }) => (

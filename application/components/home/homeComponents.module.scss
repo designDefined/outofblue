@@ -1,5 +1,5 @@
 @use "./styles/responsive";
-
+@use "./styles/animation";
 @keyframes blink {
   0% {
     filter: drop-shadow(0 0 10px rgba(255, 242, 0, 0));
@@ -21,6 +21,7 @@
 }
 
 @include responsive.only;
+
 .prop {
   position: absolute;
   top: 0;
@@ -34,8 +35,10 @@
     filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
   }
   @include responsive.mobile {
-    filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
-    animation: 1s ease infinite blink alternate-reverse;
+    @include animation.propBlinkInfinite;
+  }
+  @include responsive.desktop {
+    @include animation.propBlinkTwice;
   }
 }
 
@@ -43,16 +46,19 @@
   position: absolute;
   cursor: pointer;
   font-family: "GyeonggiTitleM", sans-serif;
-  color: white;
   font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
+  color: white;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   //background: red;
-  > div {
-    animation: 1s ease infinite blinkOpacity alternate-reverse;
+  > .mobileClick {
+    @include animation.clickBlinkInfinite;
+  }
+  > .pcClick {
+    @include animation.clickBlinkTwice;
   }
 }
 

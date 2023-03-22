@@ -96,17 +96,17 @@ export default function Books() {
     <main className={cx("main")}>
       <div className={cx("content")}>
         <div
-          className={cx("coverButton")}
+          className={cx("bookWrapper")}
           onClick={() => {
             setDisplayBubble(true);
           }}
-        />
-        <div className={cx("bookWrapper")}>
+        >
           <Image
             src={currentBook.thumbnail}
             alt={`thumbnail of ${currentBook.title}`}
             fill
           />
+          <div className={cx("clickHint")}>click!</div>
         </div>
       </div>
       {displayBubble && (
@@ -144,13 +144,14 @@ export default function Books() {
                     >
                       책 읽어보기
                     </button>
-                    <button
+                    {/*<button
                       onClick={() => {
                         window.open(book.link);
                       }}
                     >
                       구매
                     </button>
+                    */}
                   </div>
                 </div>
                 <div className={cx("textWrapper")}>
@@ -179,7 +180,7 @@ export default function Books() {
                   e.stopPropagation();
                 }}
               >
-                이전
+                <img src="assets/icon/arrow_left.png" /> 이전
               </button>
               <div
                 className={cx("pageWrapper", "mobileOnly")}
@@ -222,14 +223,17 @@ export default function Books() {
               </div>
               <button
                 className={cx("pageButton", {
-                  active: reading + 1 < currentBook.pages.length / 2,
+                  active: true,
                 })}
                 onClick={(e) => {
-                  setReading(reading + 1);
+                  reading + 1 < currentBook.pages.length / 2
+                    ? setReading(reading + 1)
+                    : window.open(currentBook.link);
                   e.stopPropagation();
                 }}
               >
-                다음
+                {reading + 1 < currentBook.pages.length / 2 ? "다음" : "구매"}
+                <img src="assets/icon/arrow_right.png" />
               </button>
             </>
           ) : (

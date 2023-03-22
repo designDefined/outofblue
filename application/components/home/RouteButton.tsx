@@ -53,9 +53,12 @@ export default function RouteButton({
         onMouseUp={() => {
           setButtonState({ ...buttonState, pressed: false });
         }}
-        onClick={() => callBackFunction()}
+        onClick={() => {
+          callBackFunction();
+        }}
       >
-        {!isPc && <div>click!</div>}
+        {!isPc && <div className={cx("mobileClick")}>click!</div>}
+        {isPc && <div className={cx("pcClick")}>click!</div>}
       </div>
     </>
   );

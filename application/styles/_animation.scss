@@ -1,0 +1,58 @@
+@mixin boxBlinkInfinite {
+  animation: 1s ease infinite boxBlink alternate-reverse;
+}
+
+@mixin boxBlinkTwice {
+  animation: 1s ease 5 boxBlink alternate-reverse;
+}
+
+@mixin clickBlinkInfinite {
+  animation: 1s ease infinite clickBlink alternate-reverse;
+}
+
+@mixin clickBlinkTwice {
+  animation: 1s ease 5 clickBlink alternate-reverse;
+  opacity: 0;
+}
+@mixin propBlinkInfinite {
+  filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
+  animation: 1s ease infinite propBlink alternate-reverse;
+}
+
+@mixin propBlinkTwice {
+  filter: drop-shadow(0 0 0 rgba(255, 242, 0, 0));
+  animation: 1s ease 5 propBlink alternate-reverse;
+}
+
+@mixin propHover {
+  &.hovered {
+    filter: drop-shadow(0 0 15px rgba(255, 242, 0, 0.8));
+  }
+}
+
+@keyframes propBlink {
+  0% {
+    filter: drop-shadow(0 0 10px rgba(255, 242, 0, 0));
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(255, 242, 0, 1));
+  }
+}
+
+@keyframes clickBlink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes boxBlink {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 247, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 247, 0, 1);
+  }
+}
