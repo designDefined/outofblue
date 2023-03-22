@@ -32,7 +32,9 @@ export default function Mailbox() {
             className={cx("mailContainer")}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={cx("mailHint")}>"Hi! I'm the Post Box"</div>
+            <div className={cx("mailHint")}>
+              &quot;Hi! I&apos;m the Post Box&quot;
+            </div>
             <div className={cx("mailInputWrapper")}>
               하실 말씀이 있으시다면 이 곳에 남겨주세요! Please leave a message!
             </div>
