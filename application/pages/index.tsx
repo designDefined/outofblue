@@ -27,6 +27,7 @@ import sup_fire2_mobile from "public/assets/background/home_mobile/sup_fire2_mob
 import sup_chair_mobile from "public/assets/background/home_mobile/sup_chair_mobile.png";
 import sup_smoke1_mobile from "public/assets/background/home_mobile/sup_smoke1_mobile.png";
 import sup_smoke2_mobile from "public/assets/background/home_mobile/sup_smoke2_mobile.png";
+import sup_woods_mobile from "public/assets/background/home_mobile/sup_woods_mobile.png";
 
 import RouteButton from "@/components/home/RouteButton";
 import { getVideoURL } from "@/functions";
@@ -36,6 +37,7 @@ import { LpPlayer } from "@/components/home/CustomProp";
 import Greeting from "@/components/home/Greeting";
 import { useMuteStore } from "@/store/muteStore";
 import ScrollHint from "@/components/home/ScrollHint";
+import { useAmbienceStore } from "@/store/ambienceStore";
 
 const cx = classNames.bind(styles);
 
@@ -107,6 +109,8 @@ export default function Home() {
   const currentAudio = useAudioStore((state) => state.currentTrack);
   const mute = useMuteStore((state) => state.mute);
   const volume = useMuteStore((state) => state.volume);
+  const setAmbiencePlaying = useAmbienceStore((state) => state.setPlaying);
+  const ambiencePlaying = useAmbienceStore((state) => state.playing);
 
   const startTransitionTo = (path: string, x: number, y: number) => {
     return () => {
@@ -173,28 +177,34 @@ export default function Home() {
           ))}
           <RouteButton
             source={sup_woods_pc}
-            drawRect={[0, 0, 0, 0]}
-            callBackFunction={() => {}}
+            drawRect={[15, 70, 8, 20]}
+            callBackFunction={() => {
+              setAmbiencePlaying(!ambiencePlaying);
+            }}
             isPc={true}
           />
           <RouteButton
             source={sup_guitar_pc}
-            drawRect={[0, 0, 0, 0]}
+            drawRect={[30, 49, 10, 36]}
             callBackFunction={() => {}}
             isPc={true}
           />
-          <Image
-            className={cx("prop", "pcOnly", "blink1")}
-            src={sup_fire1_pc}
-            alt="cup"
-            fill={true}
-          />
-          <Image
-            className={cx("prop", "pcOnly", "blink2")}
-            src={sup_fire2_pc}
-            alt="cup"
-            fill={true}
-          />
+          {ambiencePlaying && (
+            <>
+              <Image
+                className={cx("prop", "pcOnly", "blink1")}
+                src={sup_fire1_pc}
+                alt="fire1"
+                fill={true}
+              />
+              <Image
+                className={cx("prop", "pcOnly", "blink2")}
+                src={sup_fire2_pc}
+                alt="fire2"
+                fill={true}
+              />
+            </>
+          )}
           <Image
             className={cx("prop", "pcOnly", "blink3")}
             src={sup_smoke1_pc}
@@ -230,24 +240,36 @@ export default function Home() {
             />
           ))}
           <RouteButton
+            source={sup_woods_mobile}
+            drawRect={[40, 46, 32, 10]}
+            callBackFunction={() => {
+              setAmbiencePlaying(!ambiencePlaying);
+            }}
+            isPc={false}
+          />
+          <RouteButton
             className={cx("guitar")}
             source={sup_guitar_pc}
-            drawRect={[0, 0, 0, 0]}
+            drawRect={[16, 40, 20, 22]}
             callBackFunction={() => {}}
             isPc={false}
           />
-          <Image
-            className={cx("prop", "mobileOnly", "blink1")}
-            src={sup_fire1_mobile}
-            alt="fire"
-            fill
-          />
-          <Image
-            className={cx("prop", "mobileOnly", "blink2")}
-            src={sup_fire2_mobile}
-            alt="fire"
-            fill
-          />
+          {ambiencePlaying && (
+            <>
+              <Image
+                className={cx("prop", "mobileOnly", "blink1")}
+                src={sup_fire1_mobile}
+                alt="fire"
+                fill
+              />
+              <Image
+                className={cx("prop", "mobileOnly", "blink2")}
+                src={sup_fire2_mobile}
+                alt="fire"
+                fill
+              />
+            </>
+          )}
           <Image
             className={cx("prop", "mobileOnly")}
             src={sup_chair_mobile}

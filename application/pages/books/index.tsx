@@ -1,6 +1,6 @@
 import styles from "./Books.module.scss";
 import classNames from "classnames/bind";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import thumbnail_outOfBlue from "public/assets/background/books/book_outofBlue/thumbnail.png";
 import cover_outOfBlue from "public/assets/background/books/book_outofBlue/cover_main.png";
@@ -14,7 +14,6 @@ import page5_outOfBlue from "public/assets/background/books/book_outofBlue/page5
 import page6_outOfBlue from "public/assets/background/books/book_outofBlue/page6.png";
 import page7_outOfBlue from "public/assets/background/books/book_outofBlue/page7.png";
 import page8_outOfBlue from "public/assets/background/books/book_outofBlue/page8.png";
-import { read } from "fs";
 
 const cx = classNames.bind(styles);
 

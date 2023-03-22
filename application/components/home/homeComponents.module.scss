@@ -50,6 +50,7 @@
   justify-content: center;
   font-weight: 800;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  //background: red;
   > div {
     animation: 1s ease infinite blinkOpacity alternate-reverse;
   }
