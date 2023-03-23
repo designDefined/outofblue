@@ -231,7 +231,6 @@ export default function Home() {
             alt="cup"
             fill={true}
           />
-
           <Image
             className={cx("prop", "pcOnly")}
             src={sup_cup_pc}
@@ -244,7 +243,7 @@ export default function Home() {
             alt="bookCover"
             fill={true}
           />
-          {mobileRoutes.map(({ source, path, drawRect, zoomIn }) => (
+          {/*mobileRoutes.map(({ source, path, drawRect, zoomIn }) => (
             <RouteButton
               key={path}
               source={source}
@@ -252,7 +251,28 @@ export default function Home() {
               callBackFunction={startTransitionTo(path, zoomIn[0], zoomIn[1])}
               isPc={false}
             />
-          ))}
+          ))*/}
+          <RouteButton
+            source={sup_mailbox_mobile}
+            drawRect={[-1, 3, 17, 13]}
+            callBackFunction={startTransitionTo("mailbox", 20, 15)}
+            isPc={false}
+            className={"a1"}
+          />
+          <RouteButton
+            source={sup_books_mobile}
+            drawRect={[80, 42, 20, 8]}
+            callBackFunction={startTransitionTo("books", 15, 0)}
+            isPc={false}
+            className={"a2"}
+          />
+          <RouteButton
+            source={sup_lp_mobile}
+            drawRect={[56, 79, 40, 21]}
+            callBackFunction={startTransitionTo("lp", -8, -22)}
+            isPc={false}
+            className={"a3"}
+          />
           <RouteButton
             source={sup_woods_mobile}
             drawRect={[40, 46, 32, 10]}

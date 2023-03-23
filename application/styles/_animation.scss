@@ -1,5 +1,7 @@
+$test: rgb(255, 237, 131);
 @mixin boxBlinkInfinite {
-  animation: 1s ease infinite boxBlink alternate-reverse;
+  animation: 1s ease 0 boxBlink alternate-reverse;
+  box-shadow: none !important;
 }
 
 @mixin boxBlinkTwice {
@@ -7,21 +9,21 @@
 }
 
 @mixin clickBlinkInfinite {
-  animation: 1s ease infinite clickBlink alternate-reverse;
+  animation: 1s ease 0 clickBlink alternate-reverse;
 }
 
 @mixin clickBlinkTwice {
-  animation: 1s ease 5 clickBlink alternate-reverse;
+  animation: 1s ease 4 clickBlink alternate;
   opacity: 0;
 }
 @mixin propBlinkInfinite {
-  filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
+  filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.7));
   animation: 1s ease infinite propBlink alternate-reverse;
 }
 
 @mixin propBlinkTwice {
-  filter: drop-shadow(0 0 0 rgba(255, 242, 0, 0));
-  animation: 1s ease 5 propBlink alternate-reverse;
+  filter: drop-shadow(0 0 0 rgba(255, 237, 131, 0.7));
+  animation: 1s ease 4 propBlink alternate;
 }
 
 @mixin propHover {
@@ -32,10 +34,10 @@
 
 @keyframes propBlink {
   0% {
-    filter: drop-shadow(0 0 10px rgba(255, 242, 0, 0));
+    filter: drop-shadow(0 0 10px rgba(255, 237, 131, 0.7));
   }
   100% {
-    filter: drop-shadow(0 0 10px rgba(255, 242, 0, 1));
+    filter: drop-shadow(0 0 10px rgba(255, 237, 131, 1));
   }
 }
 
