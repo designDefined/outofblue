@@ -142,7 +142,7 @@ export default function Books() {
                         setReading(0);
                       }}
                     >
-                      책 읽어보기
+                      읽어보기
                     </button>
                     {/*<button
                       onClick={() => {
@@ -174,13 +174,13 @@ export default function Books() {
           {currentBook ? (
             <>
               <button
-                className={cx("pageButton", { active: reading > 0 })}
+                className={cx("pageButton", "prev", { active: reading > 0 })}
                 onClick={(e) => {
                   setReading(reading - 1);
                   e.stopPropagation();
                 }}
               >
-                <img src="assets/icon/arrow_left.png" /> 이전
+                <img src="assets/icon/arrow_left.svg" />
               </button>
               <div
                 className={cx("pageWrapper", "mobileOnly")}
@@ -222,7 +222,7 @@ export default function Books() {
                 )}
               </div>
               <button
-                className={cx("pageButton", {
+                className={cx("pageButton", "next", {
                   active: true,
                 })}
                 onClick={(e) => {
@@ -232,8 +232,8 @@ export default function Books() {
                   e.stopPropagation();
                 }}
               >
-                {reading + 1 < currentBook.pages.length / 2 ? "다음" : "구매"}
-                <img src="assets/icon/arrow_right.png" />
+                {reading + 1 < currentBook.pages.length / 2 ? "" : "더보기"}
+                <img src="assets/icon/arrow_right.svg" />
               </button>
             </>
           ) : (

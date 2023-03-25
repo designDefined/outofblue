@@ -22,6 +22,16 @@
 
 @include responsive.only;
 
+@include responsive.mobile {
+  .guitar {
+    position: absolute;
+    top: 10% !important;
+    left: -50% !important;
+    width: 220% !important;
+    height: 60% !important;
+  }
+}
+
 .prop {
   position: absolute;
   top: 0;
@@ -35,8 +45,8 @@
   &.pressed {
     filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.8));
   }
-  &.startAnim {
-    filter: drop-shadow(0 0 10px rgba(255, 237, 131, 0.7));
+  &.click {
+    filter: drop-shadow(0 0 10px rgba(255, 237, 131, 0));
     @include responsive.mobile {
       @include animation.propBlinkTwice;
     }
@@ -44,38 +54,30 @@
       @include animation.propBlinkTwice;
     }
   }
-  &.a1 {
-    animation: 12s ease infinite pB;
-  }
-  &.a2 {
-    animation: 12s ease infinite pB;
-    animation-delay: 4s;
-  }
-  &.a3 {
-    animation: 12s ease infinite pB;
-    animation-delay: 8s;
-  }
-}
-
-@keyframes pB {
-  0%,
-  100% {
-    filter: drop-shadow(1px 1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px 1px 5px rgba(255, 237, 131, 0));
-  }
-  8.25% {
-    filter: drop-shadow(1px 1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(-1px -1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(1px -1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(-1px 1px 7px rgba(255, 237, 131, 0.5));
-  }
-  16.5% {
-    filter: drop-shadow(1px 1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px 1px 5px rgba(255, 237, 131, 0));
+  &.loop {
+    &.mailbox {
+      animation: 20s ease infinite animation.$pB;
+    }
+    &.books {
+      animation: 20s ease infinite animation.$pB;
+      animation-delay: 5s;
+    }
+    &.lp {
+      animation: 20s ease infinite animation.$pB;
+      animation-delay: 10s;
+    }
+    &.woods {
+      animation: 15s ease infinite animation.$pB;
+      animation-delay: 2s;
+    }
+    &.incense {
+      animation: 15s ease infinite animation.$pB;
+      animation-delay: 7s;
+    }
+    &.guitar {
+      animation: 15s ease infinite animation.$pB;
+      animation-delay: 12s;
+    }
   }
 }
 
@@ -90,15 +92,17 @@
   font-weight: 800;
   color: white;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-  //background: red;
+  //background: rgba(red, 0.5);
   > .mobileClick {
     opacity: 0;
   }
-  &.startAnim {
+  > .pcClick {
+    opacity: 0;
+  }
+  &.click {
     > .mobileClick {
       @include animation.clickBlinkTwice;
     }
-
     > .pcClick {
       @include animation.clickBlinkTwice;
     }

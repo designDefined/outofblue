@@ -336,6 +336,7 @@
       cursor: default;
     }
     .pageButton {
+      position: absolute;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -346,6 +347,14 @@
       font-size: 36px;
       font-family: "GyeonggiTitleM", sans-serif;
       color: white;
+      &.prev {
+        bottom: 5%;
+        left: 10%;
+      }
+      &.next {
+        bottom: 5%;
+        right: 10%;
+      }
 
       &.active {
         visibility: visible;

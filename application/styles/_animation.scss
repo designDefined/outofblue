@@ -1,11 +1,20 @@
 $test: rgb(255, 237, 131);
+$pB: pB;
+$bB: bB;
+
 @mixin boxBlinkInfinite {
   animation: 1s ease 0 boxBlink alternate-reverse;
   box-shadow: none !important;
 }
 
 @mixin boxBlinkTwice {
-  animation: 1s ease 5 boxBlink alternate-reverse;
+  animation: 1s ease 4 propBlink alternate;
+  box-shadow: none !important;
+}
+
+@mixin tvBlinkInfinite {
+  animation: 20s ease infinite pB;
+  animation-delay: 15s;
 }
 
 @mixin clickBlinkInfinite {
@@ -13,16 +22,16 @@ $test: rgb(255, 237, 131);
 }
 
 @mixin clickBlinkTwice {
-  animation: 1s ease 4 clickBlink alternate;
   opacity: 0;
+  animation: 1s ease 4 clickBlink alternate;
 }
 @mixin propBlinkInfinite {
-  filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0.7));
+  filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0));
   animation: 1s ease infinite propBlink alternate-reverse;
 }
 
 @mixin propBlinkTwice {
-  filter: drop-shadow(0 0 0 rgba(255, 237, 131, 0.7));
+  filter: drop-shadow(0 0 0 rgba(255, 237, 131, 0));
   animation: 1s ease 4 propBlink alternate;
 }
 
@@ -34,7 +43,7 @@ $test: rgb(255, 237, 131);
 
 @keyframes propBlink {
   0% {
-    filter: drop-shadow(0 0 10px rgba(255, 237, 131, 0.7));
+    filter: drop-shadow(0 0 10px rgba(255, 237, 131, 0));
   }
   100% {
     filter: drop-shadow(0 0 10px rgba(255, 237, 131, 1));
@@ -56,5 +65,52 @@ $test: rgb(255, 237, 131);
   }
   100% {
     box-shadow: 0 0 10px rgba(255, 247, 0, 1);
+  }
+}
+
+@keyframes pB {
+  0%,
+  100% {
+    -webkit-filter: drop-shadow(1px 1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(-1px -1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(1px -1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(-1px 1px 5px rgba(255, 237, 131, 0));
+    filter: drop-shadow(1px 1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(-1px -1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(1px -1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(-1px 1px 5px rgba(255, 237, 131, 0));
+  }
+  16% {
+    -webkit-filter: drop-shadow(1px 1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(-1px -1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(1px -1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(-1px 1px 7px rgba(255, 237, 131, 0.5));
+    filter: drop-shadow(1px 1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(-1px -1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(1px -1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(-1px 1px 7px rgba(255, 237, 131, 0.5));
+  }
+  25% {
+    -webkit-filter: drop-shadow(1px 1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(-1px -1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(1px -1px 7px rgba(255, 237, 131, 0.5))
+      drop-shadow(-1px 1px 7px rgba(255, 237, 131, 0.5));
+    filter: drop-shadow(1px 1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(-1px -1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(1px -1px 5px rgba(255, 237, 131, 0))
+      drop-shadow(-1px 1px 5px rgba(255, 237, 131, 0));
+  }
+}
+
+@keyframes bB {
+  0%,
+  100% {
+    box-shadow: 1px 1px 5px 1px rgba(255, 237, 131, 0);
+  }
+  16% {
+    box-shadow: 1px 1px 5px 1px rgba(255, 237, 131, 0.5);
+  }
+  25% {
+    box-shadow: 1px 1px 5px 1px rgba(255, 237, 131, 0);
   }
 }

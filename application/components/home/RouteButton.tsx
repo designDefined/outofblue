@@ -2,7 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 import styles from "./homeComponents.module.scss";
 import classNames from "classnames/bind";
-import { useScrollHintStore } from "@/store/scrollHintStore";
+import { useAnimationStore } from "@/store/animationStore";
 
 const cx = classNames.bind(styles);
 
@@ -26,16 +26,14 @@ export default function RouteButton({
     hovered: false,
     pressed: false,
   });
-  // @ts-ignore
-  const isScrollEnded = useScrollHintStore((state) => state.get);
+  const stage = useAnimationStore((state) => state.stage);
 
   return (
     <>
       <Image
-        className={cx("prop", buttonState, {
+        className={cx("prop", stage, buttonState, {
           pcOnly: isPc,
           mobileOnly: !isPc,
-          startAnim: isScrollEnded,
           [className ?? "noClass"]: className !== undefined,
         })}
         src={source}
@@ -43,10 +41,9 @@ export default function RouteButton({
         fill={true}
       />
       <div
-        className={cx("routeButton", {
+        className={cx("routeButton", stage, {
           pcOnly: isPc,
           mobileOnly: !isPc,
-          startAnim: isScrollEnded,
         })}
         style={{ left: left, top, width, height }}
         onMouseEnter={() => {

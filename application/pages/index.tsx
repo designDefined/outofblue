@@ -27,6 +27,7 @@ import sup_fire2_mobile from "public/assets/background/home_mobile/sup_fire2_mob
 import sup_chair_mobile from "public/assets/background/home_mobile/sup_chair_mobile.png";
 import sup_smoke1_mobile from "public/assets/background/home_mobile/sup_smoke1_mobile.png";
 import sup_smoke2_mobile from "public/assets/background/home_mobile/sup_smoke2_mobile.png";
+import sup_incense_mobile from "public/assets/background/home_mobile/sup_incense_mobile.png";
 import sup_woods_mobile from "public/assets/background/home_mobile/sup_woods_mobile.png";
 
 import RouteButton from "@/components/home/RouteButton";
@@ -38,6 +39,7 @@ import Greeting from "@/components/home/Greeting";
 import { useMuteStore } from "@/store/muteStore";
 import ScrollHint from "@/components/home/ScrollHint";
 import { useAmbienceStore } from "@/store/ambienceStore";
+import { useAnimationStore } from "@/store/animationStore";
 
 const cx = classNames.bind(styles);
 
@@ -93,7 +95,7 @@ const mobileRoutes: RouteData[] = [
   {
     path: "lp",
     source: sup_lp_mobile,
-    drawRect: [56, 79, 40, 21],
+    drawRect: [56, 89, 40, 11],
     zoomIn: [-8, -22],
   },
 ];
@@ -101,6 +103,7 @@ const mobileRoutes: RouteData[] = [
 export default function Home() {
   const router = useRouter();
   const [clickTv, setClickTv] = useState(false);
+  const [incenseOn, setIncenseOn] = useState(true);
   const [transitionStyle, setTransitionStyle] = useState<
     { transform: string; opacity: number } | {}
   >({});
@@ -113,6 +116,7 @@ export default function Home() {
   const volume = useMuteStore((state) => state.volume);
   const setAmbiencePlaying = useAmbienceStore((state) => state.setPlaying);
   const ambiencePlaying = useAmbienceStore((state) => state.playing);
+  const animationStage = useAnimationStore((state) => state.stage);
 
   const startTransitionTo = (path: string, x: number, y: number) => {
     return () => {
@@ -142,7 +146,7 @@ export default function Home() {
         <div className={cx("content")} style={transitionStyle}>
           <div className={cx("tvViewport")}>
             <div
-              className={cx("tv", { clickTv })}
+              className={cx("tv", animationStage, { clickTv })}
               onClick={() => {
                 startTransitionTo("tv", 15, 0)();
               }}
@@ -169,6 +173,9 @@ export default function Home() {
           <div className={cx("lpWrapper")}>
             <LpPlayer />
           </div>
+          {/*******      *******/
+          /***** PC Routes *****/
+          /*******      *******/}
           {routes.map(({ source, path, drawRect, zoomIn }) => (
             <RouteButton
               key={path}
@@ -184,7 +191,7 @@ export default function Home() {
             callBackFunction={() => {
               setAmbiencePlaying(!ambiencePlaying);
             }}
-            isPc={true}
+            isPc
           />
           <RouteButton
             source={sup_guitar_pc}
@@ -201,7 +208,7 @@ export default function Home() {
                 audioRef.current?.play();
               }, 1);
             }}
-            isPc={true}
+            isPc
           />
           {ambiencePlaying && (
             <>
@@ -222,13 +229,13 @@ export default function Home() {
           <Image
             className={cx("prop", "pcOnly", "blink3")}
             src={sup_smoke1_pc}
-            alt="cup"
+            alt="smoke1"
             fill={true}
           />
           <Image
             className={cx("prop", "pcOnly", "blink4")}
             src={sup_smoke2_pc}
-            alt="cup"
+            alt="smoke2"
             fill={true}
           />
           <Image
@@ -243,46 +250,21 @@ export default function Home() {
             alt="bookCover"
             fill={true}
           />
-          {/*mobileRoutes.map(({ source, path, drawRect, zoomIn }) => (
+          {/**********      *********/
+          /***** Mobile Routes ******/
+          /**********      **********/}
+          {mobileRoutes.map(({ source, path, drawRect, zoomIn }) => (
             <RouteButton
               key={path}
               source={source}
               drawRect={drawRect}
               callBackFunction={startTransitionTo(path, zoomIn[0], zoomIn[1])}
               isPc={false}
+              className={path}
             />
-          ))*/}
+          ))}
           <RouteButton
-            source={sup_mailbox_mobile}
-            drawRect={[-1, 3, 17, 13]}
-            callBackFunction={startTransitionTo("mailbox", 20, 15)}
-            isPc={false}
-            className={"a1"}
-          />
-          <RouteButton
-            source={sup_books_mobile}
-            drawRect={[80, 42, 20, 8]}
-            callBackFunction={startTransitionTo("books", 15, 0)}
-            isPc={false}
-            className={"a2"}
-          />
-          <RouteButton
-            source={sup_lp_mobile}
-            drawRect={[56, 79, 40, 21]}
-            callBackFunction={startTransitionTo("lp", -8, -22)}
-            isPc={false}
-            className={"a3"}
-          />
-          <RouteButton
-            source={sup_woods_mobile}
-            drawRect={[40, 46, 32, 10]}
-            callBackFunction={() => {
-              setAmbiencePlaying(!ambiencePlaying);
-            }}
-            isPc={false}
-          />
-          <RouteButton
-            className={cx("guitar")}
+            className="guitar"
             source={sup_guitar_pc}
             drawRect={[16, 40, 20, 22]}
             callBackFunction={() => {
@@ -300,6 +282,24 @@ export default function Home() {
             isPc={false}
           />
           <audio ref={audioRef} src={getGuitarURL(audioEffect)} muted={mute} />
+          <RouteButton
+            className="incense"
+            source={sup_incense_mobile}
+            drawRect={[30, 10, 18, 8]}
+            callBackFunction={() => {
+              setIncenseOn(!incenseOn);
+            }}
+            isPc={false}
+          />
+          <RouteButton
+            className="woods"
+            source={sup_woods_mobile}
+            drawRect={[43, 47, 22, 9]}
+            callBackFunction={() => {
+              setAmbiencePlaying(!ambiencePlaying);
+            }}
+            isPc={false}
+          />
           {ambiencePlaying && (
             <>
               <Image
@@ -322,18 +322,22 @@ export default function Home() {
             alt="chair"
             fill
           />
-          <Image
-            className={cx("prop", "mobileOnly", "blink3")}
-            src={sup_smoke1_mobile}
-            alt="incense smoke 1"
-            fill
-          />
-          <Image
-            className={cx("prop", "mobileOnly", "blink4")}
-            src={sup_smoke2_mobile}
-            alt="incense smoke 2"
-            fill
-          />
+          {incenseOn && (
+            <>
+              <Image
+                className={cx("prop", "mobileOnly", "blink3")}
+                src={sup_smoke1_mobile}
+                alt="incense smoke 1"
+                fill
+              />
+              <Image
+                className={cx("prop", "mobileOnly", "blink4")}
+                src={sup_smoke2_mobile}
+                alt="incense smoke 2"
+                fill
+              />
+            </>
+          )}
         </div>
         <Greeting />
       </main>
