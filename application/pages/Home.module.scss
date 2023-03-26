@@ -132,8 +132,7 @@
         }
       }
       &.loop {
-        animation: 20s ease infinite animation.$pB;
-        animation-delay: 15s;
+        @include animation.tvBlinkInfinite;
       }
       video {
         width: 100%;

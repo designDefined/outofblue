@@ -55,29 +55,7 @@
     }
   }
   &.loop {
-    &.mailbox {
-      animation: 20s ease infinite animation.$pB;
-    }
-    &.books {
-      animation: 20s ease infinite animation.$pB;
-      animation-delay: 5s;
-    }
-    &.lp {
-      animation: 20s ease infinite animation.$pB;
-      animation-delay: 10s;
-    }
-    &.woods {
-      animation: 15s ease infinite animation.$pB;
-      animation-delay: 2s;
-    }
-    &.incense {
-      animation: 15s ease infinite animation.$pB;
-      animation-delay: 7s;
-    }
-    &.guitar {
-      animation: 15s ease infinite animation.$pB;
-      animation-delay: 12s;
-    }
+    animation: 8s linear infinite animation.$pB;
   }
 }
 

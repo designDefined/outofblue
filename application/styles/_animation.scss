@@ -13,8 +13,7 @@ $bB: bB;
 }
 
 @mixin tvBlinkInfinite {
-  animation: 20s ease infinite pB;
-  animation-delay: 15s;
+  animation: 8s linear infinite pB;
 }
 
 @mixin clickBlinkInfinite {
@@ -27,7 +26,7 @@ $bB: bB;
 }
 @mixin propBlinkInfinite {
   filter: drop-shadow(0 0 5px rgba(255, 242, 0, 0));
-  animation: 1s ease infinite propBlink alternate-reverse;
+  animation: 1s ease infinite propBlink alternate;
 }
 
 @mixin propBlinkTwice {
@@ -71,34 +70,13 @@ $bB: bB;
 @keyframes pB {
   0%,
   100% {
-    -webkit-filter: drop-shadow(1px 1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px 1px 5px rgba(255, 237, 131, 0));
-    filter: drop-shadow(1px 1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px 1px 5px rgba(255, 237, 131, 0));
+    filter: drop-shadow(0px 0px 5px rgba(255, 237, 131, 0));
   }
-  16% {
-    -webkit-filter: drop-shadow(1px 1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(-1px -1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(1px -1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(-1px 1px 7px rgba(255, 237, 131, 0.5));
-    filter: drop-shadow(1px 1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(-1px -1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(1px -1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(-1px 1px 7px rgba(255, 237, 131, 0.5));
+  30% {
+    filter: drop-shadow(0px 0px 5px rgba(255, 237, 131, 1));
   }
-  25% {
-    -webkit-filter: drop-shadow(1px 1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(-1px -1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(1px -1px 7px rgba(255, 237, 131, 0.5))
-      drop-shadow(-1px 1px 7px rgba(255, 237, 131, 0.5));
-    filter: drop-shadow(1px 1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(1px -1px 5px rgba(255, 237, 131, 0))
-      drop-shadow(-1px 1px 5px rgba(255, 237, 131, 0));
+  45% {
+    filter: drop-shadow(0px 0px 5px rgba(255, 237, 131, 0));
   }
 }
 
@@ -107,10 +85,10 @@ $bB: bB;
   100% {
     box-shadow: 1px 1px 5px 1px rgba(255, 237, 131, 0);
   }
-  16% {
-    box-shadow: 1px 1px 5px 1px rgba(255, 237, 131, 0.5);
+  30% {
+    box-shadow: 1px 1px 5px 1px rgba(255, 237, 131, 1);
   }
-  25% {
+  45% {
     box-shadow: 1px 1px 5px 1px rgba(255, 237, 131, 0);
   }
 }
