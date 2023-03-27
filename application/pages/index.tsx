@@ -161,7 +161,7 @@ export default function Home() {
                 <video
                   ref={videoRef}
                   src={getVideoURL(currentVideoName, 480)}
-                  muted={mute || currentAudio !== null}
+                  muted
                   autoPlay
                   loop
                   playsInline
