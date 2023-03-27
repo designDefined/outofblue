@@ -1,21 +1,40 @@
 @use "./styles/sizing";
 @use "./styles/background";
 @use "./styles/responsive";
+@use "./styles/animation";
 
 .content {
-  .coverButton {
+  .bookWrapper {
     position: absolute;
-    width: 15.8%;
-    height: 23.5%;
-    left: 44.6%;
-    top: 70.8%;
-    transform: rotate(-16.5deg);
+    top: 63.7%;
+    left: 47.5%;
+    width: 10%;
+    height: 37.5%;
+    transform: rotate(73.5deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: 0.2s;
     &:hover {
-      background: rgba(black, 0.3);
+      background-color: rgba(98, 98, 98, 0.3);
+      img {
+        opacity: 0.8;
+      }
     }
   }
 }
+
+.clickHint {
+  position: absolute;
+  font-weight: 800;
+  color: white;
+  font-size: 28px;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  opacity: 0;
+  pointer-events: none;
+}
+
 @include responsive.desktop {
   .main {
     @include sizing.subContainer();
@@ -25,6 +44,12 @@
 
   .content {
     @include sizing.subContent(background.$bg-books);
+    .bookWrapper {
+      @include animation.boxBlinkTwice;
+      .clickHint {
+        @include animation.clickBlinkTwice;
+      }
+    }
   }
 
   .bubbleWrapper {
@@ -89,6 +114,18 @@
           &.on {
             visibility: visible;
           }
+          button {
+            font-family: "GyeonggiTitleM", sans-serif;
+            font-size: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+            &:hover {
+              font-weight: 600;
+              //color: gray;
+            }
+          }
         }
         &:hover {
           .bookOverlay {
@@ -130,6 +167,7 @@
         font-weight: 400;
         text-align: center;
         font-family: "GmarketSansMedium", sans-serif;
+        white-space: pre-wrap;
       }
       .text {
         width: 100%;
@@ -159,12 +197,15 @@
       cursor: default;
     }
     .pageButton {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       cursor: pointer;
       visibility: hidden;
       border: none;
       background: none;
       font-size: 36px;
-      font-family: "GmarketSansMedium", sans-serif;
+      font-family: "GyeonggiTitleM", sans-serif;
       color: white;
       &:hover {
         color: gray;
@@ -226,7 +267,11 @@
       }
     }
     .bookOverlay {
-      margin-top: 10px;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      width: 200%;
+      display: flex;
+      justify-content: space-around;
       button {
         font: inherit;
         border: #76a676 solid 3px;
@@ -236,6 +281,12 @@
         border-radius: 4px;
         margin: 0 5px;
       }
+      &.on {
+        button {
+          background: #76a676;
+          color: white;
+        }
+      }
     }
 
     .title {
@@ -244,6 +295,8 @@
       font-weight: 600;
       text-align: center;
       font-family: "GyeonggiTitleM", sans-serif;
+      white-space: pre-wrap;
+      margin-bottom: 16px;
     }
 
     .subTitle {
@@ -253,6 +306,7 @@
       margin-bottom: 16px;
       text-align: center;
       font-family: "GmarketSansMedium", sans-serif;
+      white-space: pre-wrap;
     }
 
     .text {
@@ -282,13 +336,25 @@
       cursor: default;
     }
     .pageButton {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       cursor: pointer;
       visibility: hidden;
       border: none;
       background: none;
       font-size: 36px;
-      font-family: "GmarketSansMedium", sans-serif;
+      font-family: "GyeonggiTitleM", sans-serif;
       color: white;
+      &.prev {
+        bottom: 5%;
+        left: 10%;
+      }
+      &.next {
+        bottom: 5%;
+        right: 10%;
+      }
 
       &.active {
         visibility: visible;

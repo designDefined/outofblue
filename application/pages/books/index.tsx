@@ -1,7 +1,8 @@
 import styles from "./Books.module.scss";
 import classNames from "classnames/bind";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import thumbnail_outOfBlue from "public/assets/background/books/book_outofBlue/thumbnail.png";
 import cover_outOfBlue from "public/assets/background/books/book_outofBlue/cover_main.png";
 import front_outOfBlue from "public/assets/background/books/book_outofBlue/cover_front.png";
 import back_outOfBlue from "public/assets/background/books/book_outofBlue/cover_back.png";
@@ -13,7 +14,6 @@ import page5_outOfBlue from "public/assets/background/books/book_outofBlue/page5
 import page6_outOfBlue from "public/assets/background/books/book_outofBlue/page6.png";
 import page7_outOfBlue from "public/assets/background/books/book_outofBlue/page7.png";
 import page8_outOfBlue from "public/assets/background/books/book_outofBlue/page8.png";
-import { read } from "fs";
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +23,9 @@ type BookData = {
   title: string;
   subTitle: string;
   content: string;
+  thumbnail: StaticImageData;
   pages: StaticImageData[];
+  link: string;
 };
 
 const outOfBluePreview = [
@@ -48,9 +50,11 @@ const data: BookData[] = [
     content:
       "떠오르는 대로의 단편적인 생각들을 모은 '아웃오브블루'의 첫 단상집\n" +
       "\n" +
-      "경계를 열어두고 다양한 분야에서 창작 활동을 하는 아웃오브블루의 삶과 가장 밀접한 글이자,\n" +
+      "경계를 열어두고 다양한 분야에서 창작 활동을 하는 아웃오브블루의 삶과 가장 밀접한 글이자, " +
       "누구나 일상 속에서 공감할 수 있는 위트와 철학이 담긴 시적 에세이",
+    thumbnail: thumbnail_outOfBlue,
     pages: outOfBluePreview,
+    link: "https://smartstore.naver.com/theblueroom/products/8202198583",
   },
   /*
   {
@@ -81,23 +85,35 @@ const data: BookData[] = [
 ];
 export default function Books() {
   const [displayBubble, setDisplayBubble] = useState(false);
-  const [currentBook, setCurrentBook] = useState<BookData | null>(null);
+  const [currentBook, setCurrentBook] = useState<BookData>(data[0]);
   const [reading, setReading] = useState<number | false>(false);
+
+  useLayoutEffect(() => {
+    if (window.innerWidth < 1024) setDisplayBubble(true);
+  }, []);
+
   return (
     <main className={cx("main")}>
       <div className={cx("content")}>
         <div
-          className={cx("coverButton")}
+          className={cx("bookWrapper")}
           onClick={() => {
             setDisplayBubble(true);
           }}
-        />
+        >
+          <Image
+            src={currentBook.thumbnail}
+            alt={`thumbnail of ${currentBook.title}`}
+            fill
+          />
+          <div className={cx("clickHint")}>click!</div>
+        </div>
       </div>
       {displayBubble && (
         <div
           className={cx("bubbleWrapper")}
           onClick={() => {
-            setDisplayBubble(false);
+            if (window.innerWidth >= 1024) setDisplayBubble(false);
           }}
         >
           <div
@@ -111,7 +127,7 @@ export default function Books() {
                 <div className={cx("coverWrapper")}>
                   <Image
                     src={book.cover}
-                    alt={`Album cover of ${book.title}`}
+                    alt={`Book cover of ${book.title}`}
                     quality={10}
                     fill
                   />
@@ -119,12 +135,23 @@ export default function Books() {
                     className={cx("bookOverlay", {
                       on: currentBook?.id === book.id,
                     })}
-                    onClick={() => {
-                      setCurrentBook(book);
-                      setReading(0);
-                    }}
                   >
-                    {currentBook?.id === book.id ? "계속 읽기" : "읽기"}
+                    <button
+                      onClick={() => {
+                        setCurrentBook(book);
+                        setReading(0);
+                      }}
+                    >
+                      읽어보기
+                    </button>
+                    {/*<button
+                      onClick={() => {
+                        window.open(book.link);
+                      }}
+                    >
+                      구매
+                    </button>
+                    */}
                   </div>
                 </div>
                 <div className={cx("textWrapper")}>
@@ -147,16 +174,29 @@ export default function Books() {
           {currentBook ? (
             <>
               <button
-                className={cx("pageButton", { active: reading > 0 })}
+                className={cx("pageButton", "prev", { active: reading > 0 })}
                 onClick={(e) => {
                   setReading(reading - 1);
                   e.stopPropagation();
                 }}
               >
-                이전
+                <img src="assets/icon/arrow_left.svg" />
               </button>
               <div
-                className={cx("pageWrapper")}
+                className={cx("pageWrapper", "mobileOnly")}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {reading * 2 < currentBook.pages.length && (
+                  <Image
+                    src={currentBook.pages[reading]}
+                    alt={`${currentBook.title} page ${reading}`}
+                    objectFit={"contain"}
+                    fill
+                  />
+                )}
+              </div>
+              <div
+                className={cx("pageWrapper", "pcOnly")}
                 onClick={(e) => e.stopPropagation()}
               >
                 {reading * 2 < currentBook.pages.length && (
@@ -182,15 +222,18 @@ export default function Books() {
                 )}
               </div>
               <button
-                className={cx("pageButton", {
-                  active: reading + 1 < currentBook.pages.length / 2,
+                className={cx("pageButton", "next", {
+                  active: true,
                 })}
                 onClick={(e) => {
-                  setReading(reading + 1);
+                  reading + 1 < currentBook.pages.length / 2
+                    ? setReading(reading + 1)
+                    : window.open(currentBook.link);
                   e.stopPropagation();
                 }}
               >
-                다음
+                {reading + 1 < currentBook.pages.length / 2 ? "" : "더보기"}
+                <img src="assets/icon/arrow_right.svg" />
               </button>
             </>
           ) : (

@@ -1,7 +1,7 @@
 import styles from "./Tv.module.scss";
 import classNames from "classnames/bind";
 import { getVideoURL } from "@/functions";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import sup_flower from "public/assets/background/tv/sup_flower.png";
 import { useVideoStore } from "@/store/videoStore";
@@ -67,17 +67,25 @@ const data: {
 
 export default function Tv() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const globalMute = useMuteStore((state) => state.mute);
-  const [muted, setMuted] = useState(true);
   const { currentVideoName, setCurrentVideoName } = useVideoStore(
     (state) => state,
   );
   const [displayBubble, setDisplayBubble] = useState(false);
   const setAudioPlaying = useAudioStore((state) => state.setPlaying);
+  const mute = useMuteStore((state) => state.mute);
+  const setMute = useMuteStore((state) => state.setMute);
+  const volume = useMuteStore((state) => state.volume);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!currentVideoName) setCurrentVideoName("liebesKamel");
+    if (window.innerWidth < 1024) setDisplayBubble(true);
   }, []);
+
+  useLayoutEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume;
+    }
+  }, [volume, videoRef]);
 
   return (
     <main className={cx("main")}>
@@ -86,23 +94,34 @@ export default function Tv() {
           className={cx("tvWrapper")}
           onClick={() => {
             setDisplayBubble(true);
-            videoRef.current?.pause();
+            if (window.innerWidth >= 1024) videoRef.current?.pause();
           }}
         >
           {currentVideoName && (
             <video
               ref={videoRef}
               src={getVideoURL(currentVideoName, 1920)}
-              muted={muted || globalMute}
-              autoPlay={true}
-              loop={true}
+              muted={mute}
+              autoPlay
+              loop
+              playsInline
             />
           )}
+          <div className={cx("clickHint")}>click!</div>
         </div>
         <Image className={cx("prop")} src={sup_flower} alt={"lp"} />
       </div>
       {displayBubble && (
         <div className={cx("bubbleWrapper")}>
+          <button
+            className={cx("close", "pcOnly")}
+            onClick={() => {
+              setDisplayBubble(false);
+              videoRef.current?.play();
+            }}
+          >
+            닫기
+          </button>
           <div className={cx("list")}>
             {data.map(
               ({ id, videoName, subTitle, title, credit, content, link }) => (
@@ -120,39 +139,24 @@ export default function Tv() {
                         on: currentVideoName === videoName,
                       })}
                     >
-                      {currentVideoName === videoName ? (
-                        <button
-                          onClick={() => {
-                            setMuted(false);
+                      <button
+                        className={cx("playButton")}
+                        onClick={() => {
+                          setCurrentVideoName(videoName);
+                          setAudioPlaying(false);
+                          if (window.innerWidth >= 1024)
                             setDisplayBubble(false);
-                            setAudioPlaying(false);
-                            videoRef.current?.play();
-                          }}
-                        >
-                          계속 재생
-                        </button>
-                      ) : (
-                        <>
-                          <button
-                            onClick={() => {
-                              setCurrentVideoName(videoName);
-                              setMuted(false);
-                              setDisplayBubble(false);
-                              setAudioPlaying(false);
-                              //videoRef.current?.play();
-                            }}
-                          >
-                            재생
-                          </button>
-                          <button
-                            onClick={() => {
-                              window.open(link);
-                            }}
-                          >
-                            링크
-                          </button>
-                        </>
-                      )}
+                        }}
+                      >
+                        Tv로 클립 보기
+                      </button>
+                      <button
+                        onClick={() => {
+                          window.open(link);
+                        }}
+                      >
+                        FULL 영상 보러가기
+                      </button>
                     </div>
                   </div>
                   <div className={cx("textWrapper")}>

@@ -9,29 +9,43 @@
   background-color: rgba(black, 0.3);
   opacity: 0.8;
   z-index: 999;
-  button {
-    position: relative;
-    width: 30%;
-    aspect-ratio: 1/1;
-    background: none;
-    border: none;
-    cursor: pointer;
-    &:hover {
-      background-color: rgba(black, 0.5);
-    }
-  }
 }
 @include responsive.desktop {
   .MenuBar {
-    width: 12%;
-    height: 8%;
     bottom: 0;
+
+    input {
+      width: 8vw;
+    }
+    button {
+      position: relative;
+      width: 2vw;
+      aspect-ratio: 1/1;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin: 8px 8px;
+      &:hover {
+        background-color: rgba(black, 0.5);
+      }
+    }
   }
 }
 @include responsive.mobile {
   .MenuBar {
-    width: 30%;
     height: 6%;
     top: 0;
+    input {
+      width: 25vw;
+    }
+    button {
+      position: relative;
+      width: 8vw;
+      aspect-ratio: 1/1;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin: 0 8px;
+    }
   }
 }

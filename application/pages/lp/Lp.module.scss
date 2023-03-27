@@ -1,6 +1,7 @@
 @use "./styles/sizing";
 @use "./styles/background";
 @use "./styles/responsive";
+@use "./styles/animation";
 
 .main {
 }
@@ -15,6 +16,9 @@
     transform: skewX(-7deg);
     cursor: pointer;
     transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       background-color: rgba(98, 98, 98, 0.3);
       img {
@@ -31,6 +35,17 @@
     filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
   }
 }
+
+.clickHint {
+  position: absolute;
+  font-weight: 800;
+  color: white;
+  font-size: 28px;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  z-index: 80;
+  opacity: 0;
+}
+
 @include responsive.desktop {
   .main {
     @include sizing.subContainer(150vh);
@@ -39,6 +54,12 @@
   }
   .content {
     @include sizing.subContent(background.$bg-lp);
+  }
+  .lpWrapper {
+    @include animation.boxBlinkTwice;
+    .clickHint {
+      @include animation.clickBlinkTwice;
+    }
   }
   .bubbleWrapper {
     position: absolute;
@@ -95,20 +116,53 @@
           visibility: hidden;
           display: flex;
           align-items: center;
-          justify-content: space-evenly;
+          justify-content: center;
+          word-break: keep-all;
+
           &.on {
             visibility: visible;
+            padding-left: 10px;
           }
           button {
             font-family: "GyeonggiTitleM", sans-serif;
-            font-size: 28px;
+            font-size: 20px;
             background: none;
             border: none;
             cursor: pointer;
             color: white;
             &:hover {
               font-weight: 600;
-              color: gray;
+              //color: gray;
+            }
+          }
+          .linkBubble {
+            position: absolute;
+            top: 30%;
+            right: -50%;
+            width: 300%;
+            height: 150%;
+            background: background.$bg-linkBubble no-repeat bottom;
+            background-size: contain;
+            transform: rotate(90deg) scaleX(1.3);
+            z-index: 99;
+            pointer-events: none;
+            .links {
+              position: absolute;
+              top: -10%;
+              left: 27%;
+              width: 40%;
+              height: 130%;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              align-items: center;
+              transform: scaleX(0.77) rotate(-90deg);
+              pointer-events: auto;
+
+              .link {
+                font: inherit;
+                color: black;
+              }
             }
           }
         }
@@ -231,6 +285,10 @@
     }
     .audioOverlay {
       margin-top: 10px;
+      width: 200%;
+      display: flex;
+      justify-content: space-around;
+
       button {
         font: inherit;
         border: #76a676 solid 3px;
@@ -239,6 +297,42 @@
         padding: 4px 8px;
         border-radius: 4px;
         margin: 0 5px;
+        word-break: keep-all;
+      }
+      &.on {
+        .playButton {
+          background: #76a676;
+          color: white;
+        }
+      }
+      .linkBubble {
+        position: absolute;
+        top: 60%;
+        right: -80%;
+        width: 300%;
+        height: 150%;
+        background: background.$bg-linkBubble no-repeat bottom;
+        background-size: contain;
+        transform: rotate(90deg) scaleX(1.3);
+        z-index: 99;
+        pointer-events: none;
+        .links {
+          position: absolute;
+          top: 20%;
+          left: 25%;
+          width: 40%;
+          height: 90%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+          transform: scaleX(0.77) rotate(-90deg);
+          pointer-events: auto;
+          .link {
+            font: inherit;
+            color: black;
+          }
+        }
       }
     }
 

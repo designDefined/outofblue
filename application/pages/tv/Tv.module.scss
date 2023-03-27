@@ -1,6 +1,9 @@
 @use "./styles/sizing";
 @use "./styles/background";
 @use "./styles/responsive";
+@use "./styles/animation";
+
+@include responsive.only;
 
 .tvWrapper {
   position: absolute;
@@ -25,13 +28,29 @@
   pointer-events: none;
 }
 
+.clickHint {
+  position: absolute;
+  font-weight: 800;
+  color: white;
+  font-size: 28px;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  opacity: 0;
+}
+
 @include responsive.desktop {
   .main {
     @include sizing.subContainer(120vh);
   }
   .content {
     @include sizing.subContent(background.$bg-tv);
+    .tvWrapper {
+      @include animation.boxBlinkTwice;
+      .clickHint {
+        @include animation.clickBlinkTwice;
+      }
+    }
   }
+
   .bubbleWrapper {
     position: absolute;
     width: calc(100vh / 9 * 18);
@@ -44,6 +63,22 @@
     background-size: cover;
     font-family: "KCCChassam", sans-serif;
     transform: translateY(30px);
+
+    .close {
+      position: absolute;
+      top: 36%;
+      left: 72%;
+      z-index: 999;
+      background: none;
+      color: black;
+      font: inherit;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      &:hover {
+        color: gray;
+      }
+    }
 
     .list {
       position: absolute;
@@ -101,7 +136,7 @@
             border: none;
             cursor: pointer;
             color: white;
-
+            word-break: keep-all;
             &:hover {
               font-weight: 600;
               color: gray;
@@ -187,6 +222,7 @@
     align-items: center;
     //  background-color: #76a676;
     background-color: rgba(234, 192, 175);
+    overflow-x: hidden;
   }
   .content {
     @include sizing.mobileContent(background.$bg-tv);
@@ -219,6 +255,10 @@
     }
     .videoOverlay {
       margin-bottom: 10px;
+      display: flex;
+      justify-content: space-around;
+      word-break: keep-all;
+
       button {
         font: inherit;
         border: #76a676 solid 3px;
@@ -227,6 +267,12 @@
         padding: 4px 8px;
         border-radius: 4px;
         margin-right: 5px;
+      }
+      &.on {
+        .playButton {
+          background: #76a676;
+          color: white;
+        }
       }
     }
 

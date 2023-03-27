@@ -5,11 +5,19 @@ import { StaticImageData } from "next/image";
 export type TrackData = {
   id: number;
   audioName: string;
-  link: string;
   cover: StaticImageData;
   title: string;
   subTitle: string;
   content: string;
+  links: {
+    melon: string;
+    genie: string;
+    bugs: string;
+    flo: string;
+    vibe: string;
+    apple: string;
+    youtube: string;
+  };
 };
 
 type AudioStore = {

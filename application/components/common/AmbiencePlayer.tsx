@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useAudioStore } from "@/store/audioStore";
-import { getAudioURL } from "@/functions";
+import { useAmbienceStore } from "@/store/ambienceStore";
 import { useMuteStore } from "@/store/muteStore";
+import { getAudioURL } from "@/functions";
 
-const AudioPlayer = () => {
+const AmbiencePlayer = () => {
   const ref = useRef<HTMLAudioElement>(null);
-  const { setAudioRef, playing, currentTrack } = useAudioStore(
+  const { setAudioRef, setPlaying, playing } = useAmbienceStore(
     (state) => state,
   );
   const mute = useMuteStore((state) => state.mute);
@@ -28,17 +28,17 @@ const AudioPlayer = () => {
     } else {
       if (ref.current) ref.current.pause();
     }
-  }, [currentTrack, playing]);
+  }, [playing]);
 
-  return currentTrack ? (
+  return (
     <audio
       ref={ref}
-      src={getAudioURL(currentTrack.audioName)}
+      src={getAudioURL("fireplace")}
       loop
       muted={mute}
+      autoPlay
     />
-  ) : (
-    <audio ref={ref} />
   );
 };
-export default AudioPlayer;
+
+export default AmbiencePlayer;
