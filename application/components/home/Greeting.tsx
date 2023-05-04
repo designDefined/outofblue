@@ -82,7 +82,7 @@ export default function Greeting() {
             sessionStorage.setItem("greeting", JSON.stringify(true));
           }}
         >
-          닫기
+          <img src="assets/icon/close_700.svg" />
         </div>
       </div>
       {scrollHint ? (
