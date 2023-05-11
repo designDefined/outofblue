@@ -24,6 +24,7 @@ import sup_mailbox_mobile from "public/assets/background/home_mobile/sup_mailbox
 import sup_lp_mobile from "public/assets/background/home_mobile/sup_LP_mobile.png";
 import sup_fire1_mobile from "public/assets/background/home_mobile/sup_fire1_mobile.png";
 import sup_fire2_mobile from "public/assets/background/home_mobile/sup_fire2_mobile.png";
+import sup_guitar_mobile from "public/assets/background/home_mobile/sup_guitar_mobile.png";
 import sup_chair_mobile from "public/assets/background/home_mobile/sup_chair_mobile.png";
 import sup_smoke1_mobile from "public/assets/background/home_mobile/sup_smoke1_mobile.png";
 import sup_smoke2_mobile from "public/assets/background/home_mobile/sup_smoke2_mobile.png";
@@ -265,7 +266,7 @@ export default function Home() {
           ))}
           <RouteButton
             className="guitar"
-            source={sup_guitar_pc}
+            source={sup_guitar_mobile}
             drawRect={[16, 40, 20, 22]}
             callBackFunction={() => {
               const guitarNum = (Math.floor(Math.random() * 4) + 1) as
