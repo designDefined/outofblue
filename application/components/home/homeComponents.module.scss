@@ -129,7 +129,7 @@
   transition: 1s ease;
 
   &.open {
-    display: block;
+    display: flex;
   }
   &.scrollHint {
     background: rgba(black, 0);
@@ -150,6 +150,9 @@
 
 @include responsive.desktop {
   .Greeting {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 80px;
     text-align: center;
     .close {
@@ -164,6 +167,30 @@
       cursor: pointer;
       &:hover {
         opacity: 1;
+      }
+    }
+  }
+  .buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .button {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      color: white;
+      font-family: "GyeonggiTitleM", sans-serif;
+      font-size: 20px;
+      cursor: pointer;
+
+      &.invisible {
+        visibility: hidden;
+      }
+      img {
+        width: auto;
+        margin: 0 2px;
       }
     }
   }

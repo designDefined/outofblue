@@ -7,7 +7,7 @@ import ScrollHint from "@/components/home/ScrollHint";
 import { useAnimationStore } from "@/store/animationStore";
 
 const greetingTitle = "The Blue Room";
-const greetingData = [
+const greetingPC = [
   "안녕하세요, 아웃오브블루의 공간 ‘The Blue Room’에 오신 것을 환영합니다." +
     "\n공간 구석구석에는 아웃오브블루의 창작물들이 배치되어 있습니다. \n원하시는 걸 마음껏 'click' 해보세요!\n" +
     "\n" +
@@ -19,7 +19,7 @@ const greetingData = [
     "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0- outofblue -",
 ];
 
-const a = [
+const deprecated = [
   "아, 가시기 전에 하실 말씀이 있으시다면\n" +
     "POST BOX에 쪽지 넣어주세요\n" +
     "차차 확인하고 연락드릴게요!\n" +
@@ -71,7 +71,25 @@ export default function Greeting() {
     >
       <div className={cx("container", "pcOnly")}>
         <div className={cx("title")}>{greetingTitle}</div>
-        <div className={cx("text")}>{greetingData[1]}</div>
+        <div className={cx("text")}>{greetingPC[page]}</div>
+        <div className={cx("buttons")}>
+          <button
+            className={cx("button")}
+            onClick={() => {
+              if (page === 0) {
+                setPage(1);
+              } else {
+                setPage(0);
+              }
+            }}
+          >
+            {page === 0 ? (
+              <img src={"assets/icon/arrow_right_ios.svg"} />
+            ) : (
+              <img src={"assets/icon/arrow_left_ios.svg"} />
+            )}
+          </button>
+        </div>
         <div
           className={cx("close")}
           onClick={() => {
@@ -102,7 +120,7 @@ export default function Greeting() {
                 className={cx("button", { invisible: page === 0 })}
                 onClick={() => setPage(page - 1)}
               >
-                <img src={"assets/icon/arrow_left.svg"} />
+                <img src={"assets/icon/arrow_left_ios.svg"} />
               </button>
               {page === greetingMobile.length - 1 ? (
                 <div
@@ -119,7 +137,7 @@ export default function Greeting() {
                   className={cx("button")}
                   onClick={() => setPage(page + 1)}
                 >
-                  <img src="assets/icon/arrow_right.svg" />
+                  <img src="assets/icon/arrow_right_ios.svg" />
                 </button>
               )}
             </div>
