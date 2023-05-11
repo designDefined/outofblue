@@ -2,6 +2,7 @@ import styles from "./homeComponents.module.scss";
 import classNames from "classnames/bind";
 import { useAudioStore } from "@/store/audioStore";
 import Image from "next/image";
+import cover_liebesKamel from "public/assets/background/lp/cover_liebesKamel.jpg";
 
 const cx = classNames.bind(styles);
 export function LpPlayer() {
@@ -25,7 +26,11 @@ export function LpPlayer() {
           </div>
         </>
       ) : (
-        <div />
+        <Image
+          src={cover_liebesKamel}
+          alt={`Album cover of liebesKamel`}
+          fill
+        />
       )}
     </div>
   );
